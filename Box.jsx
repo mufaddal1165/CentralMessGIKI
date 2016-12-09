@@ -15,6 +15,7 @@ class Box extends React.Component {
         var keys = [];
         for (var key in result.data[0]){
           keys.push(key);
+          console.log(key);
         }
          _this.setState(
         {
@@ -28,10 +29,13 @@ class Box extends React.Component {
   )
   }
   render() {
+    var _keys = this.state.Keys;
+    var _items = this.state.Items;
+    var classn = "."+this.props.classn;
     return <div>
 
       <Style
-        scopeSelector = ".box"
+        scopeSelector = {classn}
         rules={{
           boxShadow:"1px 1px 1px #000",
           overflow:"hidden",
@@ -57,7 +61,7 @@ class Box extends React.Component {
 
       </Style>
 
-      <div className = "box">
+      <div className = {this.props.classn}>
 
         <Row style={{"padding":"1.5rem"}}>
 
@@ -97,12 +101,15 @@ class Box extends React.Component {
                 </tr>
               </thead>
               <tbody>
-                {this.state.Items.map(function(result){
+                {this.state.Items.map(function(result,i){
                   return (
-                    <tr key={result.Item}><td><a>{result.Item}</a></td>
-                    <td>{result.Weight}</td>
-                    <td><a>re-order</a></td>
-                </tr>
+                    <tr >
+                      {_keys.map(function(col,j){
+
+                        return <td key={result[col]}>{result[col]}</td>
+
+                      })}
+                    </tr>
                   )
                 })}
               </tbody>

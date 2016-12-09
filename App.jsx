@@ -32,11 +32,13 @@ class App extends React.Component {
           <Row>
             <Col sm={12}>
               <Col sm={4}>
-                <Box tableHeading="Low in Stock" img="icons/low.png" headingColor="#D21616" background="#F9EFE0" url="data.json">
+                <Box classn="low" tableHeading="Low in Stock" img="icons/low.png" headingColor="#D21616" background="#F9EFE0" url="data.json">
                 </Box>
               </Col>
               <Col sm={4}>
-                //Box
+                <Box classn="updev" tableHeading="Upcoming Deliveries" img="icons/updev.png" headingColor="#27AE60" background="#d6fce6" url="updev.json">
+                </Box>
+
               </Col>
               <Col sm={4}>
                 //Box
