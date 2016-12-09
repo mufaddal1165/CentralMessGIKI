@@ -6,7 +6,10 @@ import axios from "axios"
 class Box extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {Items:new Array(),Keys:new Array(),url:this.props.url};
+    this.state = {Items:new Array(),
+      Keys:new Array(),
+      url:this.props.url,
+    };
   }
   componentDidMount() {
     var _this = this;
@@ -20,7 +23,8 @@ class Box extends React.Component {
          _this.setState(
         {
           Items:result.data,
-          Keys:keys
+          Keys:keys,
+
         }
 
       );
@@ -32,6 +36,7 @@ class Box extends React.Component {
     var _keys = this.state.Keys;
     var _items = this.state.Items;
     var classn = "."+this.props.classn;
+
     return <div>
 
       <Style
@@ -109,6 +114,7 @@ class Box extends React.Component {
                         return <td key={result[col]}>{result[col]}</td>
 
                       })}
+
                     </tr>
                   )
                 })}

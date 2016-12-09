@@ -4,5 +4,11 @@
     "Supplier":"Zahid Khan",
     "Qty/Weight":"100 pkts",
     "Day":"Today"
+  },
+  {
+    "Item":"Coca Cola",
+    "Supplier":"Nadeem Jan",
+    "Qty/Weight":"100 carets",
+    "Day":"Tomorrow"
   }
 ]
