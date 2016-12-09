@@ -1,0 +1,16 @@
+
+    [
+      {
+      "Item":"Chicken",
+      "Weight":"100"
+    },
+    {
+      "Item":"Potato",
+      "Weight":"190"
+
+    },{
+      "Item":"Mutton",
+      "Weight":"105"
+
+    }
+  ]
