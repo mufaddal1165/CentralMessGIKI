@@ -1,0 +1,4 @@
+export const GET_FOOD_LIST = 'GET_FOOD_LIST';
+export const GET_SELECTED_ITEM = 'GET_SELECTED_ITEM';
+export const SET_SELECTED_ITEM = 'SET_SELECTED_ITEM';
+export const ADD_STOCK = 'ADD_STOCK'
