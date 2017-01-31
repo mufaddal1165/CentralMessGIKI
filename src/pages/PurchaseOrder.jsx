@@ -6,8 +6,8 @@ import {connect} from "react-redux"
 import {bindActionCreators} from "redux"
 import * as Actions from '../actions'
 import PurchaseOrderItem from "./PurchaseOrderItem.jsx"
-import Radium ,{Style} from 'radium'
-import Immutable,{List} from 'immutable'
+import Radium ,{Style,} from 'radium'
+import Immutable,{List,Map} from 'immutable'
 
 class PurchaseOrder extends React.Component {
   constructor(props) {
@@ -19,8 +19,9 @@ class PurchaseOrder extends React.Component {
 
     this.state={
       noOfrows:0,
-      rowObjList:List.of(<PurchaseOrderItem suppliers={this.props.data.suppliers} foodItems={this.props.data.foodItems} actions={this.props.actions} serial={0} crosshandle={this.delRow.bind(this)}/>)
+      rowObjList:Map.of(0,<PurchaseOrderItem suppliers={this.props.data.suppliers} foodItems={this.props.data.foodItems} actions={this.props.actions} serial={0} crosshandle={this.delRow.bind(this)}/>)
     }
+    console.log(this.state.rowObjList)
   }
   populateItemList(){
     return this.props.data.foodItems.map((item)=>{
@@ -34,7 +35,7 @@ class PurchaseOrder extends React.Component {
     })
   }
   addRow(){
-  var  rows = this.state.rowObjList.push(<PurchaseOrderItem suppliers={this.props.data.suppliers} foodItems={this.props.data.foodItems} actions={this.props.actions} serial={this.state.noOfrows+1} crosshandle={this.delRow.bind(this)}/>);
+  var  rows = this.state.rowObjList.merge(Map.of(this.state.noOfrows+1,<PurchaseOrderItem suppliers={this.props.data.suppliers} foodItems={this.props.data.foodItems} actions={this.props.actions} serial={this.state.noOfrows+1} crosshandle={this.delRow.bind(this)}/>));
     var rowCount = this.state.noOfrows+1;
     this.setState(
       {
@@ -46,10 +47,9 @@ class PurchaseOrder extends React.Component {
   }
   delRow(index){
     var rows = this.state.rowObjList.delete(index)
-    var rowCount = this.state.noOfrows-1;
     this.setState({
       rowObjList:rows,
-      noOfrows:rowCount
+      // noOfrows:rowCount
     })
   }
 
@@ -71,11 +71,11 @@ class PurchaseOrder extends React.Component {
         </Style>
         <div className = "headings">
         <Row>
-          <Col sm={4}>Item</Col>
-          <Col sm={4}>Supplier</Col>
-          <Col sm={1}>Qty</Col>
+          <Col sm={3}>Item</Col>
+          <Col sm={3}>Supplier</Col>
+          <Col sm={2}>Qty</Col>
           <Col sm={1}>Unit</Col>
-          <Col sm={1}>Rate</Col>
+          <Col sm={2}>Rate</Col>
         </Row>
         </div>
         </div>
