@@ -1,5 +1,5 @@
 import React from "react"
-import {Button, HelpBlock, ControlLabel, Row, Col, Table, CheckBox, Form, FormControl, FormGroup} from "react-bootstrap"
+import {Button, HelpBlock, ControlLabel, Row, Col, Table, CheckBox, Form, FormControl, FormGroup,OverlayTrigger,Tooltip} from "react-bootstrap"
 import FieldGroup from "../components/FieldGroup.jsx"
 import Template from "../components/Template.jsx"
 import {connect} from "react-redux"
@@ -54,7 +54,8 @@ class PurchaseOrder extends React.Component {
   }
 
   render() {
-
+      const tooltip_add = (<Tooltip id='tooltip_add'>To add more items for purchase order</Tooltip>)
+      const tooltip_submit = (<Tooltip id='tooltip_submit'> Saves the purchase order</Tooltip>)
       const headings =(
         <div>
         <Style scopeSelector={headings}
@@ -95,14 +96,18 @@ class PurchaseOrder extends React.Component {
             <Col sm={3}></Col>
             <Col sm={6}>
             <Col sm={3}>
+              <OverlayTrigger placement='bottom' overlay={tooltip_add}>
               <Button onClick={()=>this.addRow()}>
                 Add
               </Button>
+              </OverlayTrigger>
             </Col>
             <Col sm={3}>
+              <OverlayTrigger placement='bottom' overlay={tooltip_submit}>
               <Button onClick={()=>{}}>
               Submit
               </Button>
+              </OverlayTrigger>
             </Col>
             </Col>
             <Col sm={3}></Col>

@@ -74,11 +74,20 @@ export default class PurchaseOrderItem extends React.Component {
     console.log(this.state.rate)
   }
   render() {
-    const cross = (<img src="../icons/cross.png" key={this.props.serial+"cross"} width="10rem" height="10rem" onClick={()=>{this.props.crosshandle(this.props.serial)}}></img>)
+    const cross = (<img src="../icons/cross.png" key={this.props.serial+"cross"} width="12rem" height="12rem" onClick={()=>{this.props.crosshandle(this.props.serial)}}></img>)
     return (
-      <div   onMouseLeave={()=>{this.setState({hover:true}); console.log('Leave')}} onMouseEnter={()=>{this.setState({hover:false}); console.log('Entered '+this.props.serial)}} >
+      <div className="PurchaseListRow"  onMouseLeave={()=>{this.setState({hover:true}); console.log('Leave')}} onMouseEnter={()=>{this.setState({hover:false}); console.log('Entered '+this.props.serial)}} >
+        <Style scopeSelector=".PurchaseListRow" rules={{
+            img:{
+              opacity:0.5
+            },
+            "img:hover":{
+              opacity:1
+            }
+          }}>
 
-      <Row className="PurchaseListRow"  key={this.props.serial+"Row"}>
+        </Style>
+      <Row   key={this.props.serial+"Row"}>
       <Form key={this.props.serial+"Form"}>
         <Col sm={3}>
         <select className="form-control" key={"foodItem"+this.props.serial} id={"FoodItem"+this.props.serial} onChange={()=>this.setActiveItem(document.getElementById("FoodItem"+this.props.serial).value)}>
