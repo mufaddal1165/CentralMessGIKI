@@ -46,6 +46,20 @@ const initialState = {
         }
 
     ],
+    suppliers:[
+      {
+        SupplierId:1,
+        Name:"Amjad Khan",
+        ContactNo:"03312355886",
+        Address:"Jehangira Road Swabi"
+      },
+      {
+        SupplierId:2,
+        Name:"Mumtaz Khan",
+        ContactNo:"03313715491",
+        Address:"Jehangira Road Swabi"
+      }
+    ],
     selectedItem : function(){ return this.foodItems[0]},
     upComingDeliveries : [
 

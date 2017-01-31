@@ -9,6 +9,7 @@ import {bindActionCreators} from "redux"
 import {connect } from 'react-redux'
 import * as Actions from '../actions'
 import Summary from '../components/Summary.jsx'
+
 class StockIn extends React.Component {
 
 constructor(props){
@@ -67,7 +68,7 @@ renderForm(){
         return (
             <div >
                 <Template>
-                    <Col sm={4}>
+                    <Col sm={2}>
                     </Col>
                     <Col sm={4}>
                         <h3>
@@ -75,6 +76,7 @@ renderForm(){
                         </h3>
                         {this.renderForm()}
                     </Col>
+                    <Col sm={2}></Col>
                     <Col sm={4}>
                       <Summary heading="Items Added" List={this.props.data.stockAdded} actions={this.props.actions}/>
                     </Col>

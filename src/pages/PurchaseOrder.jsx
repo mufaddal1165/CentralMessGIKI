@@ -4,87 +4,122 @@ import FieldGroup from "../components/FieldGroup.jsx"
 import Template from "../components/Template.jsx"
 import {connect} from "react-redux"
 import {bindActionCreators} from "redux"
-
+import * as Actions from '../actions'
+import PurchaseOrderItem from "./PurchaseOrderItem.jsx"
+import Radium ,{Style} from 'radium'
+import Immutable,{List} from 'immutable'
 
 class PurchaseOrder extends React.Component {
   constructor(props) {
     super(props);
-  }
-  
-  addTableRow(){
-    return (
-    <tr>
-      <td>
-<FieldGroup
-  Id="PurchaseOrderItem"
-  componentClass="select"
-  >
-  {/*this.populateItemList()*/}
-</FieldGroup>
-</td>
-<td>
-  <FieldGroup
-  Id="Supplier"
-  componentClass="select"
 
-  >
-  {/**/}
-</FieldGroup>
-</td>
-<td>
-  <FieldGroup
-    Id="Quantity"
-    type="text"
-    />
-</td>
-</tr>)
+
   }
-  
+  componentWillMount(){
+
+    this.state={
+      noOfrows:0,
+      rowObjList:List.of(<PurchaseOrderItem suppliers={this.props.data.suppliers} foodItems={this.props.data.foodItems} actions={this.props.actions} serial={0} crosshandle={this.delRow.bind(this)}/>)
+    }
+  }
+  populateItemList(){
+    return this.props.data.foodItems.map((item)=>{
+      return <option key={item.Name+item.FoodId}>{item.Name}</option>
+    })
+  }
+  populateSupplierList(){
+    return this.props.data.suppliers.map((supplier)=>{
+      return <option key={supplier.Name+supplier.SupplierID}>{supplier.Name}</option>
+
+    })
+  }
+  addRow(){
+  var  rows = this.state.rowObjList.push(<PurchaseOrderItem suppliers={this.props.data.suppliers} foodItems={this.props.data.foodItems} actions={this.props.actions} serial={this.state.noOfrows+1} crosshandle={this.delRow.bind(this)}/>);
+    var rowCount = this.state.noOfrows+1;
+    this.setState(
+      {
+        rowObjList:rows,
+        noOfrows:rowCount
+      }
+    )
+
+  }
+  delRow(index){
+    var rows = this.state.rowObjList.delete(index)
+    var rowCount = this.state.noOfrows-1;
+    this.setState({
+      rowObjList:rows,
+      noOfrows:rowCount
+    })
+  }
+
   render() {
-    return (<div>
+
+      const headings =(
+        <div>
+        <Style scopeSelector={headings}
+          rules={{
+
+            ".headings":{
+              textAlign:"center",
+              fontWeight:"bold"
+            }
+
+          }}
+
+          >
+        </Style>
+        <div className = "headings">
+        <Row>
+          <Col sm={4}>Item</Col>
+          <Col sm={4}>Supplier</Col>
+          <Col sm={1}>Qty</Col>
+          <Col sm={1}>Unit</Col>
+          <Col sm={1}>Rate</Col>
+        </Row>
+        </div>
+        </div>
+      )
+      return (<div>
 
       <Template>
-        <Col sm={3}>
+        <Col sm={2}>
         </Col>
-        <Col sm={6}>
+        <Col sm={8}>
           <h3>Create Purchase Order</h3>
-          <Form >
-            <Table>
-              <thead>
-                <tr>
-                <th>
-                  Item
-                </th>
-                <th>
-                  Supplier
-                </th>
-                <th>
-                  Quantity
-                </th>
-                </tr>
-              </thead>
-              <tbody>
-                {this.addTableRow()}
-            </tbody>
-            </Table>
-            <Button
-
-              >
-              Add
-            </Button>
-            <Button>
-              Remove
-            </Button>
-          <Button>
-            Edit
-          </Button>
-          </Form>
-
+          {headings}
+          <hr/>
+          {this.state.rowObjList}
+          <hr/>
+          <Row>
+            <Col sm={3}></Col>
+            <Col sm={6}>
+            <Col sm={3}>
+              <Button onClick={()=>this.addRow()}>
+                Add
+              </Button>
+            </Col>
+            <Col sm={3}>
+              <Button onClick={()=>{}}>
+              Submit
+              </Button>
+            </Col>
+            </Col>
+            <Col sm={3}></Col>
+          </Row>
         </Col>
-        <Col sm={3}>
+
+        <Col sm={2}>
         </Col>
       </Template>
     </div>);
   }
 }
-export default PurchaseOrder
+const mapStateToProps = state=>({
+    data : state.centralMess
+})
+const mapDispatchToProps = dispatch=>({
+    actions : bindActionCreators(Actions,dispatch)
+})
+
+export default connect(mapStateToProps,mapDispatchToProps)(PurchaseOrder)

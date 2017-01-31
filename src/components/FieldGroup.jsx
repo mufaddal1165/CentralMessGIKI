@@ -16,7 +16,9 @@ class FieldGroup extends React.Component {
             <FormGroup controlId={this.props.Id}>
                 <ControlLabel>{this.props.label}</ControlLabel>
                 <FormControl componentClass={this.props.componentClass} type={this.props.type}
-                             onChange={this.props.onChange}>
+                             onChange={this.props.onChange}
+                             width = {this.props.width}
+                             >
                     {this.props.children}
                 </FormControl>
                 <HelpBlock>{this.props.help}</HelpBlock>
