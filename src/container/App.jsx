@@ -25,7 +25,7 @@ class App extends Component {
                                 </Box>
                             </Col>
                             <Col sm={4}>
-                                <Box classn="updev" tableHeading="Upcoming Deliveries" img="icons/updev.png"
+                                <Box classn="updev" tableHeading="Deliveries" img="icons/updev.png"
                                      headingColor="#27AE60" background="#d6fce6" url="updev.json">
                                 </Box>
 

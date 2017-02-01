@@ -1,6 +1,6 @@
 import * as actionTypes from '../constants/ActionTypes.js'
-import Immutable from 'immutable'
-const initialState = {
+import Immutable,{Map,List} from 'immutable'
+const initialStateObj= {
     foodItems : [
         {
             FoodId:1,
@@ -60,7 +60,6 @@ const initialState = {
         Address:"Jehangira Road Swabi"
       }
     ],
-    selectedItem : function(){ return this.foodItems[0]},
     upComingDeliveries : [
 
     ],
@@ -72,28 +71,18 @@ const initialState = {
     drawnOutToday :[
 
     ],
-    stockAdded : [
-
-    ]
+    tmpStockAdded : List()
 
 }
-
+const initialState = Map(initialStateObj)
 export default function centralMess(state = initialState ,action){
     switch(action.type){
-
-        case actionTypes.SET_SELECTED_ITEM:
-            state.foodItems.map((item)=>{
-                if(item.Name === action.itemName){
-                    state = {
-                        foodItems : state.foodItems,
-                        selectedItem:()=>item
-                    }
-                }
-            })
-
-            return state;
         case actionTypes.ADD_STOCK:
-            break;
+          var tmpStock = state.get("tmpStockAdded").push(action.item);
+          return state.merge({tmpStockAdded:tmpStock});
+        case actionTypes.DELETE_TEMP_STOCK:
+          var tmpStock = state.get('tmpStockAdded').delete(action.index);
+          return state.merge({tmpStockAdded:tmpStock});
         default:
             return state;
     }

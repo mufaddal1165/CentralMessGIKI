@@ -1,6 +1,9 @@
 import React, {PropTypes} from 'react';
 import {Form,Row,Col,Button} from 'react-bootstrap'
 import Radium,{Style} from 'radium'
+import {DateField,Calender} from 'react-date-picker'
+// import  'E:/Central Mess/node_modules/react-date-picker/index.css'
+
 export default class PurchaseOrderItem extends React.Component {
   constructor(props) {
 
@@ -12,7 +15,8 @@ export default class PurchaseOrderItem extends React.Component {
         hover:true,
         qty:0,
         rate:0,
-        activeSupplier:suppliers[0]
+        activeSupplier:suppliers[0],
+        date:''
     }
   }
   componentDidMount(){
@@ -73,12 +77,24 @@ export default class PurchaseOrderItem extends React.Component {
     )
     console.log(this.state.rate)
   }
+  setDate(date){
+    this.setState(
+      {
+        date:date
+      }
+    )
+    console.log(this.state.date)
+  }
   render() {
+    // const onChange = (dateString,{dateMoment,timeStamp}) = >{console.log(dateString)}
+    let date = '2017-04-24'
+
     const cross = (<img src="../icons/cross.png" key={this.props.serial+"cross"} width="12rem" height="12rem" onClick={()=>{this.props.crosshandle(this.props.serial)}}></img>)
     return (
       <div className="PurchaseListRow"  onMouseLeave={()=>{this.setState({hover:true}); console.log('Leave')}} onMouseEnter={()=>{this.setState({hover:false}); console.log('Entered '+this.props.serial)}} >
         <Style scopeSelector=".PurchaseListRow" rules={{
-            img:{
+              padding:"0.3rem",
+              img:{
               opacity:0.5
             },
             "img:hover":{
@@ -99,14 +115,17 @@ export default class PurchaseOrderItem extends React.Component {
           {this.populateSupplierList()}
         </select>
       </Col>
-      <Col sm={2}>
+      <Col sm={1}>
         <input className="form-control" id={"Qty"+this.props.serial} type="text" key={"qty"+this.props.serial} onChange={()=>{()=> this.setQty(document.getElementById("Qty"+this.props.serial).value)}}></input>
       </Col>
       <Col sm={1}>
         <strong>{this.state.activeItem.Unit}</strong>
       </Col>
+      <Col sm={1}>
+        <input className="form-control" id={"Rate"+this.props.serial} type="text" key={"rate"+this.props.serial} onChange={()=>{()=> this.setRate(document.getElementById("Rate"+this.props.serial).value)}}></input>
+      </Col>
       <Col sm={2}>
-        <input className="form-control" id={"Rate"+this.props.serial} type="text" key={"rate"+this.props.serial} onChange={()=>{()=> this.setQty(document.getElementById("Rate"+this.props.serial).value)}}></input>
+        <input className="form-control" id={"Date"+this.props.serial} type='text' key={'Date'+this.props.serial} onChange={()=> this.setDate(document.getElementById("Date"+this.props.serial).value)}></input>
       </Col>
       <Col sm={1}>
         {this.state.hover||cross}

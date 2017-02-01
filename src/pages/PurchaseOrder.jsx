@@ -5,7 +5,7 @@ import Template from "../components/Template.jsx"
 import {connect} from "react-redux"
 import {bindActionCreators} from "redux"
 import * as Actions from '../actions'
-import PurchaseOrderItem from "./PurchaseOrderItem.jsx"
+import PurchaseOrderItem from "../components/PurchaseOrderItem.jsx"
 import Radium ,{Style,} from 'radium'
 import Immutable,{List,Map} from 'immutable'
 
@@ -74,9 +74,10 @@ class PurchaseOrder extends React.Component {
         <Row>
           <Col sm={3}>Item</Col>
           <Col sm={3}>Supplier</Col>
-          <Col sm={2}>Qty</Col>
+          <Col sm={1}>Qty</Col>
           <Col sm={1}>Unit</Col>
-          <Col sm={2}>Rate</Col>
+          <Col sm={1}>Rate</Col>
+          <Col sm={2}>Expected Date</Col>
         </Row>
         </div>
         </div>
@@ -84,9 +85,9 @@ class PurchaseOrder extends React.Component {
       return (<div>
 
       <Template>
-        <Col sm={2}>
+        <Col sm={1}>
         </Col>
-        <Col sm={8}>
+        <Col sm={10}>
           <h3>Create Purchase Order</h3>
           {headings}
           <hr/>
@@ -98,7 +99,7 @@ class PurchaseOrder extends React.Component {
             <Col sm={3}>
               <OverlayTrigger placement='bottom' overlay={tooltip_add}>
               <Button onClick={()=>this.addRow()}>
-                Add
+                Add Item
               </Button>
               </OverlayTrigger>
             </Col>
@@ -114,7 +115,7 @@ class PurchaseOrder extends React.Component {
           </Row>
         </Col>
 
-        <Col sm={2}>
+        <Col sm={1}>
         </Col>
       </Template>
     </div>);
