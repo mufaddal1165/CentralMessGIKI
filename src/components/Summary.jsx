@@ -8,8 +8,8 @@ export default class Summary extends React.Component {
 
   renderItemList(){
     return this.props.List.map((item)=>{
-      return (<li key={item.FoodId+item.Name}>{item.Name}  {item.Quantity} {item.Unit} </li>
-              
+      return (<li key={item.foodItem.FoodId+item.foodItem.Name}>{item.foodItem.Name}  {item.qty} {item.foodItem.Unit} </li>
+
             )
 })
   }

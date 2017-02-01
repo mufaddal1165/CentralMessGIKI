@@ -71,7 +71,8 @@ const initialStateObj= {
     drawnOutToday :[
 
     ],
-    tmpStockAdded : List()
+    tmpStockAdded : List(),
+    stockAdded : List()
 
 }
 const initialState = Map(initialStateObj)
@@ -83,6 +84,13 @@ export default function centralMess(state = initialState ,action){
         case actionTypes.DELETE_TEMP_STOCK:
           var tmpStock = state.get('tmpStockAdded').delete(action.index);
           return state.merge({tmpStockAdded:tmpStock});
+        case actionTypes.COMMIT_STOCK_ADDS:
+          var tmpStock = state.get('tmpStockAdded');
+          var stockAdded = state.get('stockAdded').concat(tmpStock)
+          return state.merge({stockAdded:stockAdded})
+        case actionTypes.CLEAR_TEMP_STOCK:
+          var tmpStock = List()
+          return state.merge({tmpStockAdded:tmpStock})
         default:
             return state;
     }

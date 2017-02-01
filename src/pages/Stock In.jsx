@@ -49,7 +49,7 @@ delItemListRow(index){
   this.props.actions.delTmpStock(index);
 }
 addItemToList(){
-  
+
   var item = this.state.activeItem;
   var qty = this.state.qty;
   var obj = {
@@ -57,6 +57,10 @@ addItemToList(){
     qty : qty
   }
   this.props.actions.addTmpStock(obj);
+}
+onClickSubmit(){
+  this.props.actions.commitStockAdds();
+  this.props.actions.clearTempStock();
 }
 renderForm(){
     return (
@@ -96,7 +100,7 @@ renderForm(){
 }
 
     render() {
-        const submit = (<Button>Submit</Button>)
+        const submit = (<Button onClick={()=>this.onClickSubmit()}>Submit</Button>)
         return (
             <div >
                 <Template>
@@ -125,6 +129,7 @@ renderForm(){
                     </Col>
                     <Col sm={2}></Col>
                     <Col sm={4}>
+                      <Summary List={this.props.data.get('stockAdded')} heading="Items Added"/>
                     </Col>
                 </Template>
             </div>
