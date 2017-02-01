@@ -8,6 +8,7 @@ import * as Actions from '../actions'
 import PurchaseOrderItem from "../components/PurchaseOrderItem.jsx"
 import Radium ,{Style,} from 'radium'
 import Immutable,{List,Map} from 'immutable'
+import {DateField} from 'react-date-picker'
 
 class PurchaseOrder extends React.Component {
   constructor(props) {
@@ -19,7 +20,7 @@ class PurchaseOrder extends React.Component {
 
     this.state={
       noOfrows:0,
-      rowObjList:Map.of(0,<PurchaseOrderItem suppliers={this.props.data.suppliers} foodItems={this.props.data.foodItems} actions={this.props.actions} serial={0} crosshandle={this.delRow.bind(this)}/>)
+      rowObjList:Map.of(0,<PurchaseOrderItem suppliers={this.props.data.get("suppliers")} foodItems={this.props.data.get('foodItems')} actions={this.props.actions} serial={0} crosshandle={this.delRow.bind(this)}/>)
     }
     console.log(this.state.rowObjList)
   }
@@ -29,13 +30,13 @@ class PurchaseOrder extends React.Component {
     })
   }
   populateSupplierList(){
-    return this.props.data.suppliers.map((supplier)=>{
+    return this.props.data.get('suppliers').map((supplier)=>{
       return <option key={supplier.Name+supplier.SupplierID}>{supplier.Name}</option>
 
     })
   }
   addRow(){
-  var  rows = this.state.rowObjList.merge(Map.of(this.state.noOfrows+1,<PurchaseOrderItem suppliers={this.props.data.suppliers} foodItems={this.props.data.foodItems} actions={this.props.actions} serial={this.state.noOfrows+1} crosshandle={this.delRow.bind(this)}/>));
+  var  rows = this.state.rowObjList.merge(Map.of(this.state.noOfrows+1,<PurchaseOrderItem suppliers={this.props.data.get('suppliers')} foodItems={this.props.data.get('foodItems')} actions={this.props.actions} serial={this.state.noOfrows+1} crosshandle={this.delRow.bind(this)}/>));
     var rowCount = this.state.noOfrows+1;
     this.setState(
       {
@@ -56,6 +57,11 @@ class PurchaseOrder extends React.Component {
   render() {
       const tooltip_add = (<Tooltip id='tooltip_add'>To add more items for purchase order</Tooltip>)
       const tooltip_submit = (<Tooltip id='tooltip_submit'> Saves the purchase order</Tooltip>)
+      const submit = (<OverlayTrigger placement='bottom' overlay={tooltip_submit}>
+      <Button onClick={()=>{}}>
+      Submit
+      </Button>
+      </OverlayTrigger>)
       const headings =(
         <div>
         <Style scopeSelector={headings}
@@ -72,12 +78,10 @@ class PurchaseOrder extends React.Component {
         </Style>
         <div className = "headings">
         <Row>
-          <Col sm={3}>Item</Col>
-          <Col sm={3}>Supplier</Col>
-          <Col sm={1}>Qty</Col>
+          <Col sm={5}>Item</Col>
+          <Col sm={2}>Qty</Col>
           <Col sm={1}>Unit</Col>
-          <Col sm={1}>Rate</Col>
-          <Col sm={2}>Expected Date</Col>
+          <Col sm={2}>Rate</Col>
         </Row>
         </div>
         </div>
@@ -85,37 +89,55 @@ class PurchaseOrder extends React.Component {
       return (<div>
 
       <Template>
-        <Col sm={1}>
+        <Col sm={3}>
         </Col>
-        <Col sm={10}>
+        <Col sm={6}>
           <h3>Create Purchase Order</h3>
+          <hr/>
+          <Row>
+            <Form>
+              <Col sm={2}><strong>Supplier</strong></Col>
+            <Col sm={4}>
+
+            <select className="form-control">
+              {this.populateSupplierList()}
+            </select>
+
+          </Col>
+            <Col sm={3}><strong>Date of Delivery</strong></Col>
+          <Col sm={3}>
+            {
+              //<input className="form-control" type="text" placeholder="Date YYYY-MM-DD"></input>
+              }
+              <DateField dateFormat='YYYY-MM-DD'/>
+          </Col>
+          </Form>
+          </Row>
+          <hr/>
           {headings}
           <hr/>
           {this.state.rowObjList}
           <hr/>
           <Row>
-            <Col sm={3}></Col>
-            <Col sm={6}>
-            <Col sm={3}>
-              <OverlayTrigger placement='bottom' overlay={tooltip_add}>
-              <Button onClick={()=>this.addRow()}>
-                Add Item
-              </Button>
-              </OverlayTrigger>
+            <Col sm={2}></Col>
+            <Col sm={8}>
+                <Col sm={5}>
+                  <OverlayTrigger placement='bottom' overlay={tooltip_add}>
+                      <Button onClick={()=>this.addRow()}>
+                        Add Item
+                      </Button>
+                  </OverlayTrigger>
+                </Col>
+                <Col sm={2}></Col>
+                <Col sm={5}>
+                  {!this.state.rowObjList.size||submit}
+                </Col>
             </Col>
-            <Col sm={3}>
-              <OverlayTrigger placement='bottom' overlay={tooltip_submit}>
-              <Button onClick={()=>{}}>
-              Submit
-              </Button>
-              </OverlayTrigger>
-            </Col>
-            </Col>
-            <Col sm={3}></Col>
+            <Col sm={2}></Col>
           </Row>
         </Col>
 
-        <Col sm={1}>
+        <Col sm={3}>
         </Col>
       </Template>
     </div>);

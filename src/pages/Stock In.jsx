@@ -2,7 +2,7 @@ import React from "react"
 import NavBar from "../components/NavSide.jsx"
 import Header from "../components/Header.jsx"
 import Box from "../components/Box.jsx"
-import {Button, HelpBlock, ControlLabel, Row, Col, Table, CheckBox, Form, FormControl, FormGroup} from "react-bootstrap"
+import {Button, HelpBlock, ControlLabel, Row, Col, Table, CheckBox, Form, FormControl, FormGroup,Tooltip,OverlayTrigger} from "react-bootstrap"
 import FieldGroup from "../components/FieldGroup.jsx"
 import Template from "../components/Template.jsx"
 import {bindActionCreators} from "redux"
@@ -35,11 +35,11 @@ getFoodItems(){
     )
 }
 setActiveItem(itemName){
-    var _this = this;
+    // var _this = this;
     this.props.data.get('foodItems').map(item=>{
         if(item.Name === itemName  ){
             console.log(item.Name,item.Unit);
-            _this.setState({
+            this.setState({
                 activeItem : item
             });
         }
@@ -100,7 +100,9 @@ renderForm(){
 }
 
     render() {
-        const submit = (<Button onClick={()=>this.onClickSubmit()}>Submit</Button>)
+      const tooltip_submit = (<Tooltip id={'tooltip_'+'submit_stockin'}>Saves changes in the database</Tooltip>)
+
+        const submit = (<OverlayTrigger placement='bottom' overlay={tooltip_submit}><Button onClick={()=>this.onClickSubmit()}>Submit</Button></OverlayTrigger>)
         return (
             <div >
                 <Template>

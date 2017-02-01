@@ -41,21 +41,19 @@ export default class PurchaseOrderItem extends React.Component {
     })
   }
   setActiveItem(itemName){
-      var _this = this;
       this.props.foodItems.map(item=>{
           if(item.Name === itemName  ){
               console.log(item.Name,item.Unit);
-              _this.setState({
+              this.setState({
                   activeItem : item
               });
           }
       })
   }
   setActiveSupplier(supplierName){
-    var _this=this;
     this.props.suppliers.map(supplier=>{
       if(supplier.Name==supplierName){
-        _this.setState(
+        this.setState(
           {
             activeSupplier:supplier
           }
@@ -105,29 +103,23 @@ export default class PurchaseOrderItem extends React.Component {
         </Style>
       <Row   key={this.props.serial+"Row"}>
       <Form key={this.props.serial+"Form"}>
-        <Col sm={3}>
+        <Col sm={5}>
         <select className="form-control" key={"foodItem"+this.props.serial} id={"FoodItem"+this.props.serial} onChange={()=>this.setActiveItem(document.getElementById("FoodItem"+this.props.serial).value)}>
           {this.populateItemList()}
         </select>
         </Col>
-        <Col sm={3}>
-        <select className="form-control" key={"supplier"+this.props.serial} id={"Supplier"+this.props.serial} onChange={()=>this.setActiveSupplier(document.getElementById("Supplier"+this.props.serial).value)}>
-          {this.populateSupplierList()}
-        </select>
-      </Col>
-      <Col sm={1}>
+      <Col sm={2}>
         <input className="form-control" id={"Qty"+this.props.serial} type="text" key={"qty"+this.props.serial} onChange={()=>{()=> this.setQty(document.getElementById("Qty"+this.props.serial).value)}}></input>
       </Col>
       <Col sm={1}>
-        <strong>{this.state.activeItem.Unit}</strong>
+        <div style={{"textAlign":"center"}}>
+        <strong >{this.state.activeItem.Unit}</strong>
+        </div>
       </Col>
-      <Col sm={1}>
+      <Col sm={2}>
         <input className="form-control" id={"Rate"+this.props.serial} type="text" key={"rate"+this.props.serial} onChange={()=>{()=> this.setRate(document.getElementById("Rate"+this.props.serial).value)}}></input>
       </Col>
       <Col sm={2}>
-        <input className="form-control" id={"Date"+this.props.serial} type='text' key={'Date'+this.props.serial} onChange={()=> this.setDate(document.getElementById("Date"+this.props.serial).value)}></input>
-      </Col>
-      <Col sm={1}>
         {this.state.hover||cross}
       </Col>
       </Form>
