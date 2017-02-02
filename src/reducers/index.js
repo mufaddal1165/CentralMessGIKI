@@ -1,8 +1,8 @@
 import {combineReducers} from 'redux'
-import centralMess from './reducer-funcs.js'
+import {centralMess} from './reducer-funcs.js'
 
 const allReducers = combineReducers({
-    centralMess
+    centralMess:centralMess
 }
 )
 

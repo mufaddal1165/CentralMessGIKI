@@ -6,9 +6,7 @@ import * as Actions from '../actions'
 import Immutable, {Map} from 'immutable'
 import SelectItems from "../components/SelectItems.jsx"
 import {Col} from 'react-bootstrap'
-import Summary from '../components/Summary.jsx'
-
-class StockIn extends React.Component {
+class DemandItems extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -18,20 +16,20 @@ class StockIn extends React.Component {
       <Template>
         <Col sm={4}></Col>
         <Col sm={4}>
-          <h3>Stock In</h3>
-          <SelectItems data={this.props.data} del={this.props.actions.delTmpStock} clear={this.props.actions.clearTempStock} add={this.props.actions.addTmpStock} commit={this.props.actions.commitStockAdds} dataComp='tmpStockAdded'/>
+          <h3>Daily Items Demand</h3>
+          <SelectItems data={this.props.data} del={this.props.actions.delTmpDemand} clear={this.props.actions.clearTempDemand} add={this.props.actions.addTempDemand} commit={this.props.actions.commitStockDemand} dataComp='tmpDemandedToday'/>
 
         </Col>
-        <Col sm={4}>
-          <Summary List={this.props.data.get('stockAdded')} heading="Items Added"/>
-        </Col>
+        <Col sm={4}></Col>
       </Template>
-    </div>);  }
+    </div>);
+  }
 }
+
 const mapStateToProps = state => ({
     data: state.centralMess
 })
 const mapDispatchToProps = dispatch => ({
     actions: bindActionCreators(Actions, dispatch)
 })
-export default connect(mapStateToProps, mapDispatchToProps)(StockIn)
+export default connect(mapStateToProps, mapDispatchToProps)(DemandItems)

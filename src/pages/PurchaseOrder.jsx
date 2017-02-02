@@ -9,7 +9,7 @@ import PurchaseOrderItem from "../components/PurchaseOrderItem.jsx"
 import Radium ,{Style,} from 'radium'
 import Immutable,{List,Map} from 'immutable'
 import {DateField} from 'react-date-picker'
-
+import 'react-date-picker/index.css'
 class PurchaseOrder extends React.Component {
   constructor(props) {
     super(props);

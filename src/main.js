@@ -9,6 +9,7 @@ import StockOut from "./pages/Stock Out.jsx"
 import StockIn from "./pages/Stock In.jsx"
 import PurchaseOrder from "./pages/PurchaseOrder.jsx"
 import reducer from "./reducers/index.js"
+import DemandItems from "./pages/DemandItems.jsx"
 let store = createStore(reducer)
 
 render(
@@ -18,6 +19,7 @@ render(
     <Router path="/StockOut"component={StockOut}/>
     <Router path="/StockIn"component={StockIn}/>
     <Router path="PurchaseOrder" component={PurchaseOrder}/>
+    <Router path="DemandItems" component={DemandItems}/>
   </Router>
   </Provider>
 

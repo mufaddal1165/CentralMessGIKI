@@ -33,12 +33,16 @@ class NavBar extends React.Component {
                     </div>
                 </div>
                 <Row style={{"padding": "1rem", "fontSize": "16px", "marginTop": "1rem"}}>
-                    <NavBarButtons icon="icons/stock out.png" text="Stock Out" link="StockOut" tooltip="Use when you draw the food items out of store for cooking"/>
-                    <NavBarButtons icon="icons/stock in.png" text="Stock In" link="StockIn" tooltip="Enter the details here when new stock arrives in the store"/>
+                    <NavBarButtons icon="icons/stock out.png" text="Stock Out" link="StockOut"
+                                   tooltip="Use when you draw the food items out of store for cooking"/>
+                    <NavBarButtons icon="icons/stock in.png" text="Stock In" link="StockIn"
+                                   tooltip="Enter the details here when new stock arrives in the store"/>
                     <NavBarButtons icon="icons/payment.png" text="Payment Vouchers"/>
                     <NavBarButtons icon="icons/bill.png" text="Student Billing" tooltip="Student billing portal"/>
-                    <NavBarButtons icon="icons/purchase.png" text="Purchase Order" link="PurchaseOrder" tooltip="Place and print purchase order"/>
-                    <NavBarButtons icon="icons/demand.png" text="Demand Items" tooltip="Record the items demanded by the cooking staff. The entries corresponding to the paper must be made here"/>
+                    <NavBarButtons icon="icons/purchase.png" text="Purchase Order" link="PurchaseOrder"
+                                   tooltip="Place and print purchase order"/>
+                                 <NavBarButtons icon="icons/demand.png" text="Demand Items" link="DemandItems"
+                                   tooltip="Record the items demanded by the cooking staff. The entries corresponding to the paper must be made here"/>
                 </Row>
 
 

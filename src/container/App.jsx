@@ -8,6 +8,7 @@ import Template from "../components/Template.jsx"
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import * as Actions from '../actions'
+
 class App extends Component {
     constructor(props) {
         super(props);

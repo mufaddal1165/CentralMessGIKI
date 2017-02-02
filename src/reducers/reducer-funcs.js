@@ -60,23 +60,17 @@ const initialStateObj= {
         Address:"Jehangira Road Swabi"
       }
     ],
-    upComingDeliveries : [
-
-    ],
-    demandedToday :[
-
-    ]
-    ,
+    upComingDeliveries : List(),
+    demandedToday :List(),
+    tmpDemandedToday:List(),
     studentCount : 0,
-    drawnOutToday :[
-
-    ],
+    drawnOutToday :List(),
     tmpStockAdded : List(),
     stockAdded : List()
 
 }
 const initialState = Map(initialStateObj)
-export default function centralMess(state = initialState ,action){
+export function centralMess(state = initialState ,action){
     switch(action.type){
         case actionTypes.ADD_STOCK:
           var tmpStock = state.get("tmpStockAdded").push(action.item);
@@ -91,6 +85,21 @@ export default function centralMess(state = initialState ,action){
         case actionTypes.CLEAR_TEMP_STOCK:
           var tmpStock = List()
           return state.merge({tmpStockAdded:tmpStock})
+          //----------------------------------------------------
+        case actionTypes.DELETE_TEMP_DEMAND:
+          var tmpDemand = state.get('tmpDemandedToday').delete(action.index)
+          return state.merge({tmpDemandedToday:tmpDemand})
+        case actionTypes.CLEAR_TEMP_DEMAND:
+          var tmpDemand = List()
+          return state.merge({tmpDemandedToday:tmpDemand})
+        case actionTypes.ADD_DEMAND:
+          var tmpDemand = state.get('tmpDemandedToday').push(action.item)
+          return state.merge({tmpDemandedToday:tmpDemand})
+        case actionTypes.COMMIT_STOCK_DEMAND:
+          var tmpDemand = state.get('tmpDemandedToday')
+          var stockDemanded = state.get('demandedToday').concat(tmpDemand)
+          return state.merge({demandedToday:stockDemanded})
+
         default:
             return state;
     }

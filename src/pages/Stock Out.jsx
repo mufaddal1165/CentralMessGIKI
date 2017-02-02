@@ -26,7 +26,7 @@ class StockOut extends React.Component {
         return (
             <div >
                 <Template>
-              </Template>
+                </Template>
             </div>
         );
     }
