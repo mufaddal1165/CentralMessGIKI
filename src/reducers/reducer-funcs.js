@@ -65,6 +65,7 @@ const initialStateObj= {
     tmpDemandedToday:List(),
     studentCount : 0,
     drawnOutToday :List(),
+    tmpDrawnToday:List(),
     tmpStockAdded : List(),
     stockAdded : List()
 
@@ -99,6 +100,20 @@ export function centralMess(state = initialState ,action){
           var tmpDemand = state.get('tmpDemandedToday')
           var stockDemanded = state.get('demandedToday').concat(tmpDemand)
           return state.merge({demandedToday:stockDemanded})
+          // -------------------------------------------------
+        case actionTypes.DELETE_TEMP_DRAWING:
+          var tmpDrawing = state.get('tmpDrawnToday').delete(action.index)
+          return state.merge({tmpDrawnToday:tmpDrawing})
+        case actionTypes.CLEAR_TEMP_DRAWING:
+          var tmpDrawing = List()
+          return state.merge({tmpDrawnToday:tmpDrawing})
+        case actionTypes.ADD_DRAWING:
+          var tmpDrawing = state.get('tmpDrawnToday').push(action.item)
+          return state.merge({tmpDrawnToday:tmpDrawing})
+        case actionTypes.COMMIT_STOCK_DRAWING:
+          var tmpDrawing = state.get('tmpDrawnToday')
+          var stockDrawn = state.get('drawnOutToday').concat(tmpDrawing)
+          return state.merge({drawnOutToday:stockDrawn})
 
         default:
             return state;

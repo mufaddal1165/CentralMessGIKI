@@ -1,12 +1,13 @@
 import React from "react"
 import Radium, {Style} from "radium"
-var style_head = {
-    "backgroundColor": "#bdc3c7",
-    "height": "4rem",
-    "position": "relative"
-}
 class Header extends React.Component {
     render() {
+      var style_head = {
+          "backgroundColor": this.props.color,
+          "height": "4rem",
+          "position": "relative"
+      }
+
         return (
 
             <div style={style_head}>

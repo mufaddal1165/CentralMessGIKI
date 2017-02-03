@@ -4,8 +4,11 @@ import Header from "./Header.jsx"
 import Box from "./Box.jsx"
 import {Row, Col, Table} from "react-bootstrap"
 import axios from "axios"
+import {grey,teal} from './themes.js'
+
+const currentTheme = grey;
 var style_nav = {
-    "backgroundColor": "#2c3e50",
+    "backgroundColor": currentTheme.navbar,//"#16a085",
     "color": "white",
     "height": "120vh",
 
@@ -24,11 +27,11 @@ class Template extends React.Component {
             <div >
 
                 <Col sm={2} style={style_nav}>
-                    <NavBar/>
+                    <NavBar buttonColor={currentTheme.navbutton}/>
                 </Col>
                 <Col sm={10}>
                     <Row>
-                        <Header/>
+                        <Header color={currentTheme.header}/>
                     </Row>
                     <Row>
                         {this.props.children}

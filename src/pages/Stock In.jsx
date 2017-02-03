@@ -16,12 +16,13 @@ class StockIn extends React.Component {
   render() {
     return (<div>
       <Template>
-        <Col sm={4}></Col>
+        <Col sm={3}></Col>
         <Col sm={4}>
           <h3>Stock In</h3>
           <SelectItems data={this.props.data} del={this.props.actions.delTmpStock} clear={this.props.actions.clearTempStock} add={this.props.actions.addTmpStock} commit={this.props.actions.commitStockAdds} dataComp='tmpStockAdded'/>
 
         </Col>
+        <Col sm={1}></Col>
         <Col sm={4}>
           <Summary List={this.props.data.get('stockAdded')} heading="Items Added"/>
         </Col>

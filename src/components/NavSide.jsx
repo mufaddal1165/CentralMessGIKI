@@ -7,6 +7,7 @@ import {Style} from "radium"
 
 class NavBar extends React.Component {
     render() {
+      const buttonColor = this.props.buttonColor
         return (
             <div className="NavBar">
                 <Style scopeSelector=".NavBar" rules={{
@@ -34,15 +35,16 @@ class NavBar extends React.Component {
                 </div>
                 <Row style={{"padding": "1rem", "fontSize": "16px", "marginTop": "1rem"}}>
                     <NavBarButtons icon="icons/stock out.png" text="Stock Out" link="StockOut"
-                                   tooltip="Use when you draw the food items out of store for cooking"/>
+                                   tooltip="Use when you draw the food items out of store for cooking" color={buttonColor}/>
                     <NavBarButtons icon="icons/stock in.png" text="Stock In" link="StockIn"
-                                   tooltip="Enter the details here when new stock arrives in the store"/>
-                    <NavBarButtons icon="icons/payment.png" text="Payment Vouchers"/>
-                    <NavBarButtons icon="icons/bill.png" text="Student Billing" tooltip="Student billing portal"/>
+                                   tooltip="Enter the details here when new stock arrives in the store"
+                                   color={buttonColor}/>
+                    <NavBarButtons icon="icons/payment.png" text="Payment Vouchers" color={buttonColor}/>
+                    <NavBarButtons icon="icons/bill.png" text="Student Billing" tooltip="Student billing portal" color={buttonColor}/>
                     <NavBarButtons icon="icons/purchase.png" text="Purchase Order" link="PurchaseOrder"
-                                   tooltip="Place and print purchase order"/>
-                                 <NavBarButtons icon="icons/demand.png" text="Demand Items" link="DemandItems"
-                                   tooltip="Record the items demanded by the cooking staff. The entries corresponding to the paper must be made here"/>
+                                   tooltip="Place and print purchase order" color={buttonColor}/>
+                   <NavBarButtons icon="icons/demand.png" text="Demand Items" link="DemandItems"
+                     tooltip="Record the items demanded by the cooking staff. The entries corresponding to the paper must be made here" color={buttonColor}/>
                 </Row>
 
 

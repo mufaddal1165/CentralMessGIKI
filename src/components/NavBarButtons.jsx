@@ -3,19 +3,23 @@ import Radium from "radium";
 import {Link} from "react-router"
 import {Style} from "radium"
 import {OverlayTrigger, Tooltip} from 'react-bootstrap'
-var styles = {
-
-    "padding": "1rem",
-    ":hover": {
-        "backgroundColor": "#34495e",
-        "cursor": "default"
-    }
-
-}
 
 class NavBarButtons extends React.Component {
-
+  constructor(props){
+    super(props)
+  }
     render() {
+
+      var styles = {
+
+          "padding": "1rem",
+          ":hover": {
+              "backgroundColor": this.props.color,
+              "cursor": "default"
+          }
+
+      }
+
         const tooltip = (<Tooltip id={'tooltip_' + this.props.text}>{this.props.tooltip}</Tooltip>)
         return (
             <div>

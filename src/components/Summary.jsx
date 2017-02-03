@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 import Radium, {Style} from 'radium'
-
+import {grey,teal} from './themes.js'
 export default class Summary extends React.Component {
     constructor(props) {
         super(props);
@@ -26,7 +26,7 @@ export default class Summary extends React.Component {
                 },
                 padding: "0.5rem",
                 margin: "2rem",
-                backgroundColor: "#95a5a6"
+                backgroundColor: teal.summary
             }}>
 
             </Style>

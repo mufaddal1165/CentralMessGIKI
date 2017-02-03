@@ -14,12 +14,13 @@ class DemandItems extends React.Component {
   render() {
     return (<div>
       <Template>
-        <Col sm={4}></Col>
+        <Col sm={3}></Col>
         <Col sm={4}>
           <h3>Daily Items Demand</h3>
           <SelectItems data={this.props.data} del={this.props.actions.delTmpDemand} clear={this.props.actions.clearTempDemand} add={this.props.actions.addTempDemand} commit={this.props.actions.commitStockDemand} dataComp='tmpDemandedToday'/>
 
         </Col>
+        <Col sm ={1}></Col>
         <Col sm={4}></Col>
       </Template>
     </div>);
