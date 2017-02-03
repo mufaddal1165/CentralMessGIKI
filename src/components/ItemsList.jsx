@@ -30,11 +30,13 @@ export default class ItemsList extends React.Component {
                 "img:hover": {
                     opacity: 1
                 },
-                backgroundColor: "#F5F5F5",
+                margin:"0.2rem",
+                borderRadius:"0.5rem",
+                backgroundColor: "white",
                 fontWeight: "normal",
                 padding: "0.7rem",
                 ":hover": {
-                    fontWeight: "bold"
+                    fontWeight: "bold",
                 }
             }}>
 

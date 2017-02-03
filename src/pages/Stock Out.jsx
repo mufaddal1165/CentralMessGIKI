@@ -21,6 +21,7 @@ import SelectItems from "../components/SelectItems.jsx"
 import {bindActionCreators} from "redux"
 import * as Actions from '../actions'
 import Immutable, {Map} from 'immutable'
+import Summary from "../components/Summary.jsx"
 
 class StockOut extends React.Component {
 
@@ -37,7 +38,9 @@ class StockOut extends React.Component {
 
                   </Col>
                   <Col sm={1}></Col>
-                  <Col sm={4}></Col>
+                  <Col sm={4}>
+                    <Summary heading="Food Items Summary" List={this.props.data.get('stockAdded')}/>
+                  </Col>
                 </Template>
             </div>
         );
