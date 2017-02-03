@@ -40,8 +40,10 @@ Food | Food ID of the Item (FK)
 PurchaseOrder | Purchase Order ID (FK)
 Delivered | Boolean Flag to indicate that item was delivered or not
 QuantityDemanded | The quantity of items ordered
-QuantityReceived | Quantity received
+*QuantityReceived | Quantity received
 Rate | The rate at which the items are ordered
+
+*Note : This field might not be needed
 
 ## Supplier
 Field | Description
@@ -60,3 +62,21 @@ PONumber | Purchase order Number (FK: PurchaseOrder)
 Date | Date of Voucher
 SupplierID | SupplierID
 
+## DrawingsTable
+
+Field|Description
+-----|------------
+DrawingID | Unique ID
+FoodId | FK FoodItems 
+Qty | Quantity of items drawn from system
+Date | Date of the transaction
+
+## EntriesLog
+
+Field|Description
+-----|------------
+LogID | Unique ID
+FoodId | FK FoodItems
+Qty | Quantity of items added to store
+PurchaseOrderItemNo | FK from PurchaseOrderItems Tables
+Paid | Boolean value specifying paid or unpaid

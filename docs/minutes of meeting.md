@@ -13,7 +13,9 @@
  - one to many relationship between purchase order and payment vouchers
  - system should not impose any time constraint between payments and purchase!! 
  - size of data to accumulate over one year ? Any provisions for volume manangement  ??
+ 
 
 
+https://material.io/guidelines/style/color.html
 
 
