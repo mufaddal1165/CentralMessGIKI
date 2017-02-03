@@ -28,6 +28,7 @@ Supplier | Supplier ID (FK)
 IssueDate | Date on which purchase order was made
 DeliveryDate | Date on which delivery is expected
 
+
 Note:
 *its being assumed that all items in the purchase order will be required on same time*
 
@@ -38,6 +39,9 @@ Id  | Unique ID
 Food | Food ID of the Item (FK)
 PurchaseOrder | Purchase Order ID (FK)
 Delivered | Boolean Flag to indicate that item was delivered or not
+QuantityDemanded | The quantity of items ordered
+QuantityReceived | Quantity received
+Rate | The rate at which the items are ordered
 
 ## Supplier
 Field | Description
@@ -52,5 +56,7 @@ Address | Address of the supplier
 Field | Description
 ------|-------------
 PaymentVId | Payment Voucher Unique ID
-PONumber | Purchase oRder Number
+PONumber | Purchase order Number (FK: PurchaseOrder)
 Date | Date of Voucher
+SupplierID | SupplierID
+
