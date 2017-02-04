@@ -67,7 +67,12 @@ const initialStateObj= {
     drawnOutToday :List(),
     tmpDrawnToday:List(),
     tmpStockAdded : List(),
-    stockAdded : List()
+    stockAdded : List(),
+    lowStock : List.of({
+      'Item':'Chicken',
+      'Quantity':'20',
+      'Unit':'Kilos'
+    })
 
 }
 const initialState = Map(initialStateObj)

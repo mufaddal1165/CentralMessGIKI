@@ -15,20 +15,19 @@ class App extends Component {
 
     }
     render() {
+      const low_stock_theme ={
+        'color':'red',
+        'background':'white'
+      }
         return (
             <div >
 
                 <Template >
                         <Col sm={12}>
                             <Col sm={4}>
-                                <Box classn="low" tableHeading="Low in Stock" img="icons/low.png" headingColor="#D21616"
-                                     background="#F9EFE0" url="data.json">
-                                </Box>
+                              <Box stock={this.props.data.get('lowStock')} heading="Low in Stock" theme={low_stock_theme}/>
                             </Col>
                             <Col sm={4}>
-                                <Box classn="updev" tableHeading="Deliveries" img="icons/updev.png"
-                                     headingColor="#27AE60" background="#d6fce6" url="updev.json">
-                                </Box>
 
                             </Col>
                             <Col sm={4}>
@@ -44,7 +43,7 @@ class App extends Component {
 
 const mapStateToProps = state =>(
     {
-        data : state
+        data : state.centralMess
     }
 )
 const mapDispatchToProps = dispatch =>({

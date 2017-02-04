@@ -39,7 +39,7 @@ class StockOut extends React.Component {
                   </Col>
                   <Col sm={1}></Col>
                   <Col sm={4}>
-                    <Summary heading="Food Items Summary" List={this.props.data.get('stockAdded')}/>
+                    <Summary heading="Food Item Summary" List={this.props.data.get('stockAdded')}/>
                   </Col>
                 </Template>
             </div>

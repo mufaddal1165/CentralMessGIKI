@@ -8,130 +8,86 @@ import axios from "axios"
 class Box extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            Items: new Array(),
-            Keys: new Array(),
-            url: this.props.url,
-        };
+        this.state={
+          headings:[]
+        }
     }
 
-    componentDidMount() {
-        var _this = this;
-        this.serverRequest = axios.get(this.state.url).then(
-            function (result) {
-                var keys = [];
-                for (var key in result.data[0]) {
-                    keys.push(key);
-                    console.log(key);
-                }
-                _this.setState(
-                    {
-                        Items: result.data,
-                        Keys: keys,
-
-                    }
-                );
-
-            }
-        )
+    componentWillMount() {
+      var keys = []
+      var itemList = this.props.stock.toJS()
+      for (var key in this.props.stock.toJS()[0]){
+        keys.push(key)
+        console.log(key)
+      }
+      console.log(keys)
+      this.setState ({
+        headings:keys,
+        itemList:itemList
+      })
     }
 
     render() {
-        var _keys = this.state.Keys;
-        var _items = this.state.Items;
-        var classn = "." + this.props.classn;
+        const headingStrap = this.props.theme['color']
+        const icon = this.props.theme['icon']
+        const background = this.props.theme['background']
+        return <div className="Box">
+          <Style scopeSelector=".Box" rules={{
+              h4:{
+                color:'white',
+                textAlign:'center'
 
-        return <div>
+              },
 
-            <Style
-                scopeSelector={classn}
-                rules={{
-                    boxShadow: "1px 1px 1px #000",
-                    overflow: "hidden",
-                    backgroundColor: this.props.background,
+              backgroundColor:background,
+              height:"20rem",
+              borderRadius:'1rem',
+              
 
-                    h3: {
-                        color: this.props.headingColor,
-                        fontWeight: "bold"
-                    },
-                    ".box": {
-                        height: "100%"
-                    },
-                    table: {
-                        marginRight: "1rem",
-                        fontSize: "12px"
+            }}>
 
-                    },
-                    a: {
-                        color: this.props.headingColor,
-                        cursor: "default"
-                    }
-                }}>
+          </Style>
+          <div className="headingStrap">
+            <Style scopeSelector=".headingStrap" rules={{
+                backgroundColor:headingStrap,
+                padding:'0.3rem',
+                borderRadius:'1rem 1rem 0  0'
+              }}>
 
             </Style>
+          <h4>
+            Low in Stock
+          </h4>
+          </div>
+          <div className="boxBody">
+            <p></p>
+            <Col sm={2}></Col>
+            <Col sm={8}>
+            <Table responsive>
+              <thead>
+                {
+                  this.state.headings.map(heading=>{
+                    return (<th key={heading}>{heading}</th>)
+                  })
+                }
+              </thead>
+              <tbody>
+                {
+                  this.state.itemList.map(item=>{
+                    return <tr key={'tr'+item.Item}>
+                      {this.state.headings.map(heading=>{
+                        return <td key={'td'+item[heading]}>{item[heading]}</td>
+                      })}
+                    </tr>
+                  })
+                }
+              </tbody>
+            </Table>
+            </Col>
+            <Col sm={2}></Col>
 
-            <div className={this.props.classn}>
-
-                <Row style={{"padding": "1.5rem"}}>
-
-                    <Col sm={3}>
-
-                        <img
-                            src={this.props.img}
-                            height="50rem"
-                            width="50rem">
-                        </img>
-
-                    </Col>
-
-                    <Col sm={9}>
-
-                        <h3>
-
-                            {this.props.tableHeading}
-                        </h3>
-
-                    </Col>
-
-                </Row>
-
-                <Row>
-                    <Col sm={1}></Col>
-                    <Col sm={10}>
-                        <Table responsive>
-                            <thead>
-                            <tr>
-                                {this.state.Keys.map(function (result) {
-                                    return <th key={result}>{result}</th>
-                                })}
-                                <th>
-
-                                </th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {this.state.Items.map(function (result, i) {
-                                return (
-                                    <tr >
-                                        {_keys.map(function (col, j) {
-
-                                            return <td key={result[col]}>{result[col]}</td>
-
-                                        })}
-
-                                    </tr>
-                                )
-                            })}
-                            </tbody>
-                        </Table>
-                    </Col>
-                    <Col sm={1}>
-                    </Col>
-                </Row>
-
-            </div>
-
+          </div>
         </div>
     }
 }
-export default Radium(Box);
+export default Box;
