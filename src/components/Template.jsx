@@ -18,9 +18,9 @@ class Template extends React.Component {
         super(props);
 
     }
-    componentDidMount() {
+    componentWillMount() {
 
-    }
+      }
 
     render() {
         return (

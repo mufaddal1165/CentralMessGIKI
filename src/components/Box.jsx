@@ -47,7 +47,7 @@ class Box extends React.Component {
               },
               backgroundColor:background,
               height:"22rem",
-              borderRadius:'1rem',
+              borderRadius:'0.6rem',
               '.table':{
                 textAlign:'center',
                 fontSize:'13px'
@@ -66,7 +66,7 @@ class Box extends React.Component {
             <Style scopeSelector={`.headingStrap${className}`} rules={{
                 backgroundColor:headingStrap,
                 padding:'0.3rem',
-                borderRadius:'1rem 1rem 0  0'
+                borderRadius:'0.6rem 0.6rem 0  0'
               }}>
 
             </Style>

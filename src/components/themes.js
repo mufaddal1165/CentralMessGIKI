@@ -2,7 +2,8 @@ export const grey = {
   'header':'#bdc3c7',
   'navbar':'#2c3e50',
   'navbutton':'#34495e',
-  'summary': '"#95a5a6"'
+  'summary': '"#95a5a6"',
+  'background' : "#EEEEEE"
 }
 export const teal ={
   'header':'#4DB6AC',

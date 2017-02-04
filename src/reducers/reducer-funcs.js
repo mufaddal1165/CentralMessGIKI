@@ -48,17 +48,61 @@ const initialStateObj= {
     ],
     suppliers:[
       {
-        SupplierId:1,
-        Name:"Amjad Khan",
-        ContactNo:"03312355886",
-        Address:"Jehangira Road Swabi"
-      },
-      {
-        SupplierId:2,
-        Name:"Mumtaz Khan",
-        ContactNo:"03313715491",
-        Address:"Jehangira Road Swabi"
-      }
+  "SupplierId": 1,
+  "Name": "Patrick Hanson",
+  "Adress": "155 Haas Pass",
+  "ContactNo": "43-(822)938-4845"
+}, {
+  "SupplierId": 2,
+  "Name": "Irene Walker",
+  "Adress": "0 Hagan Avenue",
+  "ContactNo": "971-(325)965-1090"
+}, {
+  "SupplierId": 3,
+  "Name": "Aaron Cox",
+  "Adress": "9 Talisman Way",
+  "ContactNo": "63-(175)640-5989"
+}, {
+  "SupplierId": 4,
+  "Name": "Margaret Frazier",
+  "Adress": "43 Bartelt Place",
+  "ContactNo": "86-(583)515-4628"
+}, {
+  "SupplierId": 5,
+  "Name": "Fred Schmidt",
+  "Adress": "72393 Milwaukee Alley",
+  "ContactNo": "62-(144)515-6103"
+}, {
+  "SupplierId": 6,
+  "Name": "Jeffrey Stephens",
+  "Adress": "1 Farmco Crossing",
+  "ContactNo": "62-(799)127-8334"
+}, {
+  "SupplierId": 7,
+  "Name": "Lori Shaw",
+  "Adress": "2 Rieder Trail",
+  "ContactNo": "46-(162)396-0515"
+}, {
+  "SupplierId": 8,
+  "Name": "Brenda Boyd",
+  "Adress": "36 Butternut Place",
+  "ContactNo": "57-(193)749-2976"
+}, {
+  "SupplierId": 9,
+  "Name": "Lawrence Cruz",
+  "Adress": "58 Cambridge Pass",
+  "ContactNo": "86-(883)353-5929"
+}, {
+  "SupplierId": 10,
+  "Name": "Roy Owens",
+  "Adress": "798 Lakewood Gardens Junction",
+  "ContactNo": "48-(465)110-8199"
+}, {
+  "SupplierId": 11,
+  "Name": "Lillian Jones",
+  "Adress": "03 Sunfield Crossing",
+  "ContactNo": "86-(912)274-5636"
+}
     ],
     upComingDeliveries : List.of(
       {
@@ -106,6 +150,31 @@ const initialStateObj= {
       'Unit':'Dozens'
 
     }
+  ),
+  foodSummary : List.of(
+    {
+      'FoodId':1,
+      'Name':'Peas',
+      'Quantity':30,
+      'Unit':'Kilos'
+    },{
+      'FoodId':2,
+      'Name':'Red Beans',
+      'Quantity':30,
+      'Unit':'Kilos'
+    },{
+      'FoodId':3,
+      'Name':'Basmati',
+      'Quantity':50,
+      'Unit':'Kilos'
+    },{
+      'FoodId':4,
+      'Name':'Wheat',
+      'Quantity':70,
+      'Unit':'Kilos'
+    }
+
+
   )
 
 }
