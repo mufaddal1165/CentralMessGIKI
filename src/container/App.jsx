@@ -19,15 +19,20 @@ class App extends Component {
         'color':'red',
         'background':'white'
       }
+      const upcoming_stock_theme ={
+        'color':'#388E3C',
+        'background':'white'
+      }
         return (
             <div >
 
                 <Template >
                         <Col sm={12}>
                             <Col sm={4}>
-                              <Box stock={this.props.data.get('lowStock')} heading="Low in Stock" theme={low_stock_theme}/>
+                              <Box stock={this.props.data.get('lowStock')} heading="Low in Stock" theme={low_stock_theme} BoxID={1}/>
                             </Col>
                             <Col sm={4}>
+                              <Box stock={this.props.data.get('upComingDeliveries')} heading="Upcoming Deliveries" theme={upcoming_stock_theme} BoxID={2}/>
 
                             </Col>
                             <Col sm={4}>

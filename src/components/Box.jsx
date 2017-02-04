@@ -29,26 +29,41 @@ class Box extends React.Component {
 
     render() {
         const headingStrap = this.props.theme['color']
+        const seeMore = (<h6><a style={{'color':headingStrap}}>See More</a></h6>)
+        const className = 'Box' + this.props.BoxID
         const icon = this.props.theme['icon']
         const background = this.props.theme['background']
-        return <div className="Box">
-          <Style scopeSelector=".Box" rules={{
+        return <div className={className}>
+          <Style scopeSelector={'.'+className} rules={{
               h4:{
                 color:'white',
                 textAlign:'center'
 
               },
-
+              h6:{
+                textAlign:'center',
+                padding:'0rem',
+                margin:'0rem'
+              },
               backgroundColor:background,
-              height:"20rem",
+              height:"22rem",
               borderRadius:'1rem',
-              
+              '.table':{
+                textAlign:'center',
+                fontSize:'13px'
+              },
+              th:{
+                textAlign:'center'
+              },
+              a:{
+                color:'black'
+              }
 
             }}>
 
           </Style>
-          <div className="headingStrap">
-            <Style scopeSelector=".headingStrap" rules={{
+          <div className={`headingStrap${className}`}>
+            <Style scopeSelector={`.headingStrap${className}`} rules={{
                 backgroundColor:headingStrap,
                 padding:'0.3rem',
                 borderRadius:'1rem 1rem 0  0'
@@ -56,14 +71,14 @@ class Box extends React.Component {
 
             </Style>
           <h4>
-            Low in Stock
+            {this.props.heading}
           </h4>
           </div>
           <div className="boxBody">
             <p></p>
-            <Col sm={2}></Col>
-            <Col sm={8}>
-            <Table responsive>
+            <Col sm={1}></Col>
+            <Col sm={10}>
+            <Table bsClass='table' responsive>
               <thead>
                 {
                   this.state.headings.map(heading=>{
@@ -73,7 +88,7 @@ class Box extends React.Component {
               </thead>
               <tbody>
                 {
-                  this.state.itemList.map(item=>{
+                  this.state.itemList.slice(0,3).map(item=>{
                     return <tr key={'tr'+item.Item}>
                       {this.state.headings.map(heading=>{
                         return <td key={'td'+item[heading]}>{item[heading]}</td>
@@ -83,8 +98,10 @@ class Box extends React.Component {
                 }
               </tbody>
             </Table>
+            {this.state.itemList.length > 3 && seeMore}
+
             </Col>
-            <Col sm={2}></Col>
+            <Col sm={1}></Col>
 
           </div>
         </div>

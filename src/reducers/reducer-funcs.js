@@ -60,7 +60,29 @@ const initialStateObj= {
         Address:"Jehangira Road Swabi"
       }
     ],
-    upComingDeliveries : List(),
+    upComingDeliveries : List.of(
+      {
+        'Item':'Onions',
+        'Quantity':'100',
+        'Unit':'Kilos',
+        'Date':'Today'
+      },{
+        'Item':'Coriander',
+        'Quantity':'100',
+        'Unit':'Kilos',
+        'Date':'Today'
+      },{
+        'Item':'Peas',
+        'Quantity':'50',
+        'Unit':'Kilos',
+        'Date':'Today'
+      },{
+        'Item':'Tomato',
+        'Quantity':'100',
+        'Unit':'Kilos',
+        'Date':'Today'
+      }
+    ),
     demandedToday :List(),
     tmpDemandedToday:List(),
     studentCount : 0,
@@ -72,7 +94,19 @@ const initialStateObj= {
       'Item':'Chicken',
       'Quantity':'20',
       'Unit':'Kilos'
-    })
+    },
+    {
+      'Item':'Potato',
+      'Quantity':'20',
+      'Unit':'Kilos'
+    },
+    {
+      'Item':'Eggs',
+      'Quantity':'20',
+      'Unit':'Dozens'
+
+    }
+  )
 
 }
 const initialState = Map(initialStateObj)
