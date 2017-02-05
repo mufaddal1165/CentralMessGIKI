@@ -43,11 +43,22 @@ const initialStateObj= {
             Unit:'Packets',
             Quantity: 10,
             MinReorderLimit:5
-        }
+        },{
+            FoodId:7,
+            Name:'Basmati',
+            Unit:'Kilos',
+            Quantity: 100,
+            MinReorderLimit:60
+        },{
+            FoodId:8,
+            Name:'Wheat',
+            Unit:'Kilos',
+            Quantity: 100,
+            MinReorderLimit:60
+        },
 
     ],
-    suppliers:[
-      {
+    suppliers:[{
   "SupplierId": 1,
   "Name": "Patrick Hanson",
   "Adress": "155 Haas Pass",
@@ -156,22 +167,37 @@ const initialStateObj= {
       'FoodId':1,
       'Name':'Peas',
       'Quantity':30,
-      'Unit':'Kilos'
+      'Min':50,
+      'Unit':'Kilos',
+      'Drawn':'2017-01-29',
+      'Delivery':'2017-01-30'
     },{
       'FoodId':2,
       'Name':'Red Beans',
       'Quantity':30,
-      'Unit':'Kilos'
+      'Min':20,
+      'Unit':'Kilos',
+      'Drawn':'2017-01-29',
+      'Delivery':'2017-01-30'
+
     },{
       'FoodId':3,
       'Name':'Basmati',
       'Quantity':50,
-      'Unit':'Kilos'
+      'Min':10,
+      'Unit':'Kilos',
+      'Drawn':'2017-01-29',
+      'Delivery':'2017-01-30'
+
     },{
       'FoodId':4,
       'Name':'Wheat',
       'Quantity':70,
-      'Unit':'Kilos'
+      'Min':300,
+      'Unit':'Kilos',
+      'Drawn':'2017-01-29',
+      'Delivery':'2017-01-30'
+
     }
 
 

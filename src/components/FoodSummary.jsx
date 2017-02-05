@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import {Row,Col,Table} from 'react-bootstrap'
 import {Style} from 'radium'
-
+import {Link} from 'react-router'
 export default class FoodSummary extends React.Component {
   constructor(props) {
     super(props);
@@ -11,6 +11,7 @@ componentWillMount(){
 }
   render() {
     const foodItems  = this.props.foodItems
+    const qtyColor = 'red'
     return (<div>
       <Style scopeSelector='.table' rules={{
           backgroundColor:'white',
@@ -34,6 +35,14 @@ componentWillMount(){
             <th>
               Quantity
             </th>
+            <th>
+              Last Drawn
+            </th>
+            <th>
+              Last Delivery
+            </th>
+            <th>
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -42,7 +51,10 @@ componentWillMount(){
               return <tr key={item.Name+i}>
                 <td>{i+1}</td>
                 <td>{item.Name}</td>
-                <td>{item.Quantity} {item.Unit}</td>
+                <td style={item.Min > item.Quantity?{'color':qtyColor}:{}}>{item.Quantity} {item.Unit}</td>
+                <td>{item.Drawn}</td>
+                <td>{item.Delivery}</td>
+                <td><Link to={`PurchaseOrder/${item.Name}`}>Order</Link></td>
               </tr>
             })
           }

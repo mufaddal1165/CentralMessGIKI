@@ -9,8 +9,18 @@ export default class PurchaseOrderItem extends React.Component {
         super(props);
         const foodItems = this.props.foodItems;
         const suppliers = this.props.suppliers;
+        var activeItem = foodItems[0]
+        if (this.props.params){
+          console.log(this.props.params)
+          this.props.foodItems.map(item=>{
+            if(item.Name === this.props.params){
+              activeItem = item
+              console.log(item)
+            }
+          })
+        }
         this.state = {
-            activeItem: foodItems[0],
+            activeItem: activeItem,
             hover: true,
             qty: 0,
             rate: 0,
@@ -30,7 +40,7 @@ export default class PurchaseOrderItem extends React.Component {
     populateItemList() {
         return this.props.foodItems.map(item => {
             return (
-                <option key={item.FoodId + item.Name}>{item.Name}</option>
+                <option key={item.FoodId + item.Name} >{item.Name}</option>
             )
         })
     }
@@ -123,7 +133,7 @@ export default class PurchaseOrderItem extends React.Component {
                         <Col sm={5}>
                             <select className="form-control" key={"foodItem" + this.props.serial}
                                     id={"FoodItem" + this.props.serial}
-                                    onChange={() => this.setActiveItem(document.getElementById("FoodItem" + this.props.serial).value)}>
+                                    onChange={() => this.setActiveItem(document.getElementById("FoodItem" + this.props.serial).value)} defaultValue={this.state.activeItem.Name}>
                                 {this.populateItemList()}
                             </select>
                         </Col>

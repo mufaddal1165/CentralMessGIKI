@@ -1,5 +1,5 @@
 import React from "react"
-import {Router,Route,hashHistory} from "react-router"
+import {Router,Route,hashHistory,browserHistory} from "react-router"
 import {Provider} from "react-redux"
 import {createStore} from "redux"
 import ReactDOM,{render} from "react-dom"
@@ -20,6 +20,7 @@ render(
     <Router path="/StockOut"component={StockOut}/>
     <Router path="/StockIn"component={StockIn}/>
     <Router path="PurchaseOrder" component={PurchaseOrder}/>
+    <Router path="PurchaseOrder/:item" component={PurchaseOrder}/>
     <Router path="DemandItems" component={DemandItems}/>
     <Router path="FoodItems" component={FoodItemsPage}/>
   </Router>

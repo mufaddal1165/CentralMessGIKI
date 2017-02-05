@@ -80,11 +80,13 @@ class Box extends React.Component {
             <Col sm={10}>
             <Table bsClass='table' responsive>
               <thead>
+
                 {
                   this.state.headings.map(heading=>{
                     return (<th key={heading}>{heading}</th>)
                   })
                 }
+                
               </thead>
               <tbody>
                 {

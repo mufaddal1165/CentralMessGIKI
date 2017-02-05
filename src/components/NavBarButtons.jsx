@@ -25,8 +25,8 @@ class NavBarButtons extends React.Component {
             <div>
                 <OverlayTrigger placement='right' overlay={tooltip}>
                     <div className="button" style={styles}>
-                        <span><img src={this.props.icon} width="16px" height="20px"></img></span><Link
-                        to={this.props.link}>{this.props.text}</Link>
+                        <span><img src={this.props.icon} width="16px" height="20px"></img></span>
+                        <Link to={this.props.link}>{this.props.text}</Link>
                     </div>
                 </OverlayTrigger>
             </div>

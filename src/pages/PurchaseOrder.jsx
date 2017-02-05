@@ -17,10 +17,10 @@ class PurchaseOrder extends React.Component {
 
   }
   componentWillMount(){
-
+    console.log("params",this.props.params)
     this.state={
       noOfrows:0,
-      rowObjList:Map.of(0,<PurchaseOrderItem suppliers={this.props.data.get("suppliers")} foodItems={this.props.data.get('foodItems')} actions={this.props.actions} serial={0} crosshandle={this.delRow.bind(this)}/>)
+      rowObjList:Map.of(0,<PurchaseOrderItem suppliers={this.props.data.get("suppliers")} foodItems={this.props.data.get('foodItems')} actions={this.props.actions} serial={0} crosshandle={this.delRow.bind(this)}  params={this.props.params.item}/>)
     }
     console.log(this.state.rowObjList)
   }
@@ -70,8 +70,10 @@ class PurchaseOrder extends React.Component {
             ".headings":{
               textAlign:"center",
               fontWeight:"bold"
+            },
+            ".row" :{
+              margin:"0.3rem"
             }
-
           }}
 
           >
@@ -113,11 +115,12 @@ class PurchaseOrder extends React.Component {
           </Col>
           </Form>
           </Row>
-          <hr/>
+          <Row>
           {headings}
-          <hr/>
+          </Row>
+          <Row>
           {this.state.rowObjList}
-          <hr/>
+          </Row>
           <Row>
             <Col sm={2}></Col>
             <Col sm={8}>
