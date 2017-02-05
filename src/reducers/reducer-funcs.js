@@ -6,7 +6,7 @@ const initialStateObj= {
             FoodId:1,
             Name:"Chicken",
             Unit:'Kilos',
-            Quantity: 100,
+            Quantity: 0,
             MinReorderLimit:100
         },
         {

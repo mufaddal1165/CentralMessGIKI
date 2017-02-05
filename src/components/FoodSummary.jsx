@@ -33,13 +33,13 @@ componentWillMount(){
               Name
             </th>
             <th>
-              Quantity
-            </th>
-            <th>
               Last Drawn
             </th>
             <th>
               Last Delivery
+            </th>
+            <th>
+              Quantity
             </th>
             <th>
             </th>
@@ -51,9 +51,9 @@ componentWillMount(){
               return <tr key={item.Name+i}>
                 <td>{i+1}</td>
                 <td>{item.Name}</td>
-                <td style={item.Min > item.Quantity?{'color':qtyColor}:{}}>{item.Quantity} {item.Unit}</td>
                 <td>{item.Drawn}</td>
                 <td>{item.Delivery}</td>
+                <td style={item.Min > item.Quantity?{'color':qtyColor}:{}}>{item.Quantity} {item.Unit}</td>
                 <td><Link to={`PurchaseOrder/${item.Name}`}>Order</Link></td>
               </tr>
             })

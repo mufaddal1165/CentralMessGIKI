@@ -34,7 +34,7 @@ class StockOut extends React.Component {
                   <Col sm={3}></Col>
                   <Col sm={4}>
                     <h3>Stock Drawings</h3>
-                    <SelectItems data={this.props.data} del={this.props.actions.delTmpDrawings} clear={this.props.actions.clearTempDrawings} add={this.props.actions.addTempDrawings} commit={this.props.actions.commitStockDrawings} dataComp='tmpDrawnToday'/>
+                    <SelectItems data={this.props.data} del={this.props.actions.delTmpDrawings} clear={this.props.actions.clearTempDrawings} add={this.props.actions.addTempDrawings} commit={this.props.actions.commitStockDrawings} dataComp='tmpDrawnToday' isStockOut={true}/>
 
                   </Col>
                   <Col sm={1}></Col>

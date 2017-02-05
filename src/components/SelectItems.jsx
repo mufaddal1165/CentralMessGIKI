@@ -8,11 +8,12 @@ class SelectItems extends React.Component{
   constructor(props) {
       super(props)
       const data = this.props.data.toJS();
+      const isStockOut = this.props.isStockOut
       this.state = {
 
           activeItem: data.foodItems[0],
           qty: 0,
-
+          isStockOut:isStockOut
       }
   }
 
@@ -58,25 +59,31 @@ class SelectItems extends React.Component{
   }
 
   renderForm() {
+    var addButton = this.state.isStockOut && this.state.activeItem.Quantity == 0 ?(  <button className="btn btn-default" onClick={() => this.addItemToList()} disabled>
+          Add
+      </button>):(<button className="btn btn-default" onClick={() => this.addItemToList()}>
+            Add
+        </button>)
       return (
           <Form>
 
               <Row className="headings">
-                  <Col sm={5}><strong>Item</strong></Col>
-                  <Col sm={5}><strong>{this.state.activeItem.Unit}</strong></Col>
+                  <Col sm={4}><strong>Item</strong></Col>
+                  <Col sm={2}><strong>{this.state.activeItem.Unit}</strong></Col>
+                  <Col sm={4}><strong>Stock</strong></Col>
                   <Col sm={2}></Col>
               </Row>
               <p></p>
               <Style scopeSelector=".headings" rules={{textAlign: "center"}}></Style>
               <Row>
-                  <Col sm={5}>
+                  <Col sm={4}>
                       <select className='form-control' id="FoodItem"
                               onChange={() => this.setActiveItem(document.getElementById("FoodItem").value)}
                       >
                           {this.getFoodItems()}
                       </select>
                   </Col>
-                  <Col sm={5}>
+                  <Col sm={2}>
                       <input
                           className='form-control'
                           id="Qty"
@@ -88,10 +95,16 @@ class SelectItems extends React.Component{
                       >
                       </input>
                   </Col>
+                  <Col sm={4}>
+                    <input className='form-control'
+                      id="inStockQty"
+                      type="text"
+                      disabled="disabled"
+                      value = {this.state.activeItem.Quantity+' '+this.state.activeItem.Unit}
+                      />
+                  </Col>
                   <Col sm={2}>
-                      <Button onClick={() => this.addItemToList()}>
-                          Add
-                      </Button>
+                      {addButton}
                   </Col>
               </Row>
           </Form>
