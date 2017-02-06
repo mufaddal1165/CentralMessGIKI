@@ -80,3 +80,14 @@ FoodId | FK FoodItems
 Qty | Quantity of items added to store
 PurchaseOrderItemNo | FK from PurchaseOrderItems Tables
 Paid | Boolean value specifying paid or unpaid
+
+## Relationships
+ - Suppier 1 ---- n Payment Voucher 
+ - Purchase Order 1 -----n Payment Voucher
+ - FoodItems 1 ------ n EntriesLog
+ - PurchaseOrderItem 1 ------ n EntriesLog
+ - FoodItems 1 ------ n DrawingsTable
+ - FoodItems 1 ------ n PurchaseOrderItem
+ - PurchaseOrder 1 --------n PurchaseOrderItems
+ - Supplier 1 ------------ n PurchaseOrder
+ - TypeOfFood 1 -------- n FoodItems
