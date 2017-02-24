@@ -47,6 +47,9 @@ class NavBar extends React.Component {
                      tooltip="Record the items demanded by the cooking staff. The entries corresponding to the paper must be made here" color={buttonColor}/>
                    <NavBarButtons icon="icons/summary.png" text="Food Items" link="FoodItems"
                        tooltip="List of food items and there quantity present in the system" color={buttonColor}/>
+                     <NavBarButtons icon="icons/settings.png" text="Settings" link="Settings"
+                           tooltip="Add a new food item or supplier in the system" color={buttonColor}/>
+
                 </Row>
 
 

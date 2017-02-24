@@ -1,7 +1,9 @@
 import React, {PropTypes} from 'react';
 import {Row, Col} from 'react-bootstrap'
 import {Style} from 'radium'
-export default class ItemsList extends React.Component {
+// import iconCross from 'file!../../icons/cross.png'
+
+class ItemsList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -11,7 +13,7 @@ export default class ItemsList extends React.Component {
 
     render() {
         const cross = (
-            <img src="../icons/cross.png" key={this.props.serial + "cross"} width="9rem" height="9rem" onClick={() => {
+            <img src='icons/cross.png' key={this.props.serial + "cross"} width="9rem" height="9rem" onClick={() => {
                 this.props.crosshandle(this.props.serial)
             }}></img>)
 
@@ -53,3 +55,4 @@ export default class ItemsList extends React.Component {
 }
 
 ItemsList.propTypes = {};
+export default ItemsList

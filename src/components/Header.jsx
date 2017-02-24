@@ -27,7 +27,7 @@ class Header extends React.Component {
                             <img src="icons/search.png" width="16px" height="16px"></img>
                         </button>
                     </form>
-                    <span></span><a>Log Out </a>
+
                 </div>
             </div>
         )

@@ -3,6 +3,7 @@ import ItemsList from '../components/ItemsList.jsx'
 import Immutable, {Map} from 'immutable'
 import React,{Component} from "react"
 import {Tooltip,OverlayTrigger,Button,Row,Form,Col} from 'react-bootstrap'
+import ModalMessage from 'react-modal-message-wrapper'
 class SelectItems extends React.Component{
 
   constructor(props) {
@@ -13,7 +14,8 @@ class SelectItems extends React.Component{
 
           activeItem: data.foodItems[0],
           qty: 0,
-          isStockOut:isStockOut
+          isStockOut:isStockOut,
+          isConfDlgVsbl:false
       }
   }
 
@@ -54,8 +56,11 @@ class SelectItems extends React.Component{
   }
 
   onClickSubmit() {
+
+      if(confirm('Are you sure? These changes will be written to database?')){
       this.props.commit();
       this.props.clear();
+    }
   }
 
   renderForm() {
@@ -113,7 +118,7 @@ class SelectItems extends React.Component{
 
   render() {
       const tooltip_submit = (<Tooltip id={'tooltip_' + 'submit_stockin'}>Saves changes in the database</Tooltip>)
-
+      // let displayMessage =(this.state.isConfDlgVsbl)?<ModalMessage key='confirmation-dialog' message='Are you sure you want to save?' primaryButton='OK' primaryButtonClicked={this.dialogMsg}/>:null;
       const submit = (
           <OverlayTrigger placement='bottom' overlay={tooltip_submit}><Button onClick={() => this.onClickSubmit()}>Submit</Button></OverlayTrigger>)
       return (

@@ -11,6 +11,8 @@ import PurchaseOrder from "./pages/PurchaseOrder.jsx"
 import reducer from "./reducers/index.js"
 import DemandItems from "./pages/DemandItems.jsx"
 import FoodItemsPage from "./pages/FoodItemsPage.jsx"
+import AddFoodItem from './pages/AddFoodItem.jsx'
+import Settings from './pages/Settings.jsx'
 let store = createStore(reducer)
 
 render(
@@ -23,6 +25,7 @@ render(
     <Router path="PurchaseOrder/:item" component={PurchaseOrder}/>
     <Router path="DemandItems" component={DemandItems}/>
     <Router path="FoodItems" component={FoodItemsPage}/>
+    <Router path='Settings' component={Settings}/>
   </Router>
   </Provider>
 

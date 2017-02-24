@@ -24,7 +24,7 @@ class App extends Component {
         'background':'white'
       }
         return (
-            <div >
+            <div  >
 
                 <Template >
                         <Col sm={12}>
