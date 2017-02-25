@@ -13,6 +13,7 @@ import DemandItems from "./pages/DemandItems.jsx"
 import FoodItemsPage from "./pages/FoodItemsPage.jsx"
 import AddFoodItem from './pages/AddFoodItem.jsx'
 import Settings from './pages/Settings.jsx'
+import Login from './pages/Login.jsx'
 let store = createStore(reducer)
 
 render(
@@ -26,6 +27,7 @@ render(
     <Router path="DemandItems" component={DemandItems}/>
     <Router path="FoodItems" component={FoodItemsPage}/>
     <Router path='Settings' component={Settings}/>
+    <Router path='Login' component={Login}/>
   </Router>
   </Provider>
 
