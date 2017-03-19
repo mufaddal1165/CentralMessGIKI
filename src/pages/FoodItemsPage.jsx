@@ -9,6 +9,8 @@ import {Style} from 'radium'
 class FoodItemsPage extends React.Component {
   constructor(props) {
     super(props);
+    const {fetchFoodItems} = this.props.actions
+    fetchFoodItems()
   }
 
   render() {
@@ -48,7 +50,8 @@ class FoodItemsPage extends React.Component {
               }}>
 
             </Style>
-          <FoodSummary foodItems={this.props.data.get('foodSummary')}></FoodSummary>
+          <FoodSummary foodItems={this.props.data.get('foodItems')}></FoodSummary>
+          
           </Row>
         </Col>
         <Col sm={2}></Col>

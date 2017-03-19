@@ -11,6 +11,7 @@ import Summary from '../components/Summary.jsx'
 class StockIn extends React.Component {
   constructor(props) {
     super(props);
+    
   }
 
   render() {
@@ -30,7 +31,7 @@ class StockIn extends React.Component {
     </div>);  }
 }
 const mapStateToProps = state => ({
-    data: state.centralMess
+  data: state.centralMess
 })
 const mapDispatchToProps = dispatch => ({
     actions: bindActionCreators(Actions, dispatch)

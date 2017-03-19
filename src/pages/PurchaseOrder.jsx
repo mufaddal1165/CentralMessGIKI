@@ -1,156 +1,145 @@
 import React from "react"
-import {Button, HelpBlock, ControlLabel, Row, Col, Table, CheckBox, Form, FormControl, FormGroup,OverlayTrigger,Tooltip} from "react-bootstrap"
+import { Button, HelpBlock, ControlLabel, Row, Col, Table, CheckBox, Form, FormControl, FormGroup, OverlayTrigger, Tooltip } from "react-bootstrap"
 import FieldGroup from "../components/FieldGroup.jsx"
 import Template from "../components/Template.jsx"
-import {connect} from "react-redux"
-import {bindActionCreators} from "redux"
+import { connect } from "react-redux"
+import { bindActionCreators } from "redux"
 import * as Actions from '../actions'
 import PurchaseOrderItem from "../components/PurchaseOrderItem.jsx"
-import Radium ,{Style,} from 'radium'
-import Immutable,{List,Map} from 'immutable'
-import {DateField} from 'react-date-picker'
+import Radium, { Style, } from 'radium'
+import Immutable, { List, Map } from 'immutable'
+import { DateField } from 'react-date-picker'
 import 'react-date-picker/index.css'
 class PurchaseOrder extends React.Component {
   constructor(props) {
     super(props);
-
-
-  }
-  componentWillMount(){
-    console.log("params",this.props.params)
-    this.state={
-      noOfrows:0,
-      rowObjList:Map.of(0,<PurchaseOrderItem suppliers={this.props.data.get("suppliers")} foodItems={this.props.data.get('foodItems')} actions={this.props.actions} serial={0} crosshandle={this.delRow.bind(this)}  params={this.props.params.item}/>)
+    this.state = {
+      itemRows: Map()
     }
-    console.log(this.state.rowObjList)
+
   }
-  populateItemList(){
-    return this.props.data.foodItems.map((item)=>{
-      return <option key={item.Name+item.FoodId}>{item.Name}</option>
-    })
+  componentWillMount() {
+
+    const { fetchSuppliers, fetchFoodItems } = this.props.actions
+    fetchSuppliers()
+    fetchFoodItems()
+
+
   }
-  populateSupplierList(){
-    return this.props.data.get('suppliers').map((supplier)=>{
-      return <option key={supplier.Name+supplier.SupplierID}>{supplier.Name}</option>
+  componentDidMount() {
+    const suppliers = this.props.suppliers.get('suppliers')
+    const foodItems = this.props.data.get('foodItems')
+    console.log('params',this.props.params)
+    this.setState({
+      rowcount: 0,
 
     })
   }
-  addRow(){
-  var  rows = this.state.rowObjList.merge(Map.of(this.state.noOfrows+1,<PurchaseOrderItem suppliers={this.props.data.get('suppliers')} foodItems={this.props.data.get('foodItems')} actions={this.props.actions} serial={this.state.noOfrows+1} crosshandle={this.delRow.bind(this)}/>));
-    var rowCount = this.state.noOfrows+1;
+
+  addRow() {
+    var rows = this.state.itemRows.merge(Map.of(this.state.rowcount, <PurchaseOrderItem suppliers={this.props.suppliers.get('suppliers')} foodItems={this.props.data.get('foodItems')} actions={this.props.actions} serial={this.state.rowcount} crosshandle={this.delRow.bind(this)} />));
+    var rowCount = this.state.rowcount + 1;
     this.setState(
       {
-        rowObjList:rows,
-        noOfrows:rowCount
+        itemRows: rows,
+        rowcount: rowCount
       }
     )
 
   }
-  delRow(index){
-    var rows = this.state.rowObjList.delete(index)
+  delRow(index) {
+    var rows = this.state.itemRows.delete(index)
+    let count = this.state.rowcount - 1
     this.setState({
-      rowObjList:rows,
-      // noOfrows:rowCount
+      itemRows: rows,
+      rowcount: count
     })
   }
-
   render() {
-      const tooltip_add = (<Tooltip id='tooltip_add'>To add more items for purchase order</Tooltip>)
-      const tooltip_submit = (<Tooltip id='tooltip_submit'> Saves the purchase order</Tooltip>)
-      const submit = (<OverlayTrigger placement='bottom' overlay={tooltip_submit}>
-      <Button onClick={()=>{}}>
-      Submit
+    const suppliers = this.props.suppliers.get('suppliers')
+    const foodItems = this.props.data.get('foodItems')
+    const tooltip_add = (<Tooltip id='tooltip_add'>To add more items for purchase order</Tooltip>)
+    const tooltip_submit = (<Tooltip id='tooltip_submit'> Saves the purchase order</Tooltip>)
+    const submit = (<OverlayTrigger placement='bottom' overlay={tooltip_submit}>
+      <Button onClick={() => { }}>
+        Submit
       </Button>
-      </OverlayTrigger>)
-      const headings =(
-        <div>
+    </OverlayTrigger>)
+    const headings = (
+      <div>
         <Style scopeSelector={headings}
           rules={{
 
-            ".headings":{
-              textAlign:"center",
-              fontWeight:"bold"
+            ".headings": {
+              textAlign: "center",
+              fontWeight: "bold"
             },
-            ".row" :{
-              margin:"0.3rem"
+            ".row": {
+              margin: "0.3rem"
             }
           }}
 
-          >
+        >
         </Style>
-        <div className = "headings">
-        <Row>
-          <Col sm={5}>Item</Col>
-          <Col sm={2}>Qty</Col>
-          <Col sm={1}>Unit</Col>
-          <Col sm={2}>Rate</Col>
-        </Row>
+        <div className="headings">
+          <Row>
+            <Col sm={3}>Item</Col>
+            <Col sm={3}>Supplier</Col>
+            <Col sm={1}>Qty</Col>
+            <Col sm={1}>Unit</Col>
+            <Col sm={1}>Rate</Col>
+            <Col sm={3}>Delivery Date</Col>
+          </Row>
         </div>
-        </div>
-      )
-      return (<div>
+      </div>
+    )
+    return (<div>
 
       <Template>
-        <Col sm={3}>
+        <Col sm={1}>
         </Col>
-        <Col sm={6}>
+        <Col sm={10}>
           <h3>Create Purchase Order</h3>
-          <hr/>
+          <hr />
+
           <Row>
-            <Form>
-              <Col sm={2}><strong>Supplier</strong></Col>
-            <Col sm={4}>
-
-            <select className="form-control">
-              {this.populateSupplierList()}
-            </select>
-
-          </Col>
-            <Col sm={3}><strong>Date of Delivery</strong></Col>
-          <Col sm={3}>
-            {
-              //<input className="form-control" type="text" placeholder="Date YYYY-MM-DD"></input>
-              }
-              <DateField dateFormat='YYYY-MM-DD'/>
-          </Col>
-          </Form>
+            {headings}
           </Row>
           <Row>
-          {headings}
-          </Row>
-          <Row>
-          {this.state.rowObjList}
+            {this.state.itemRows}
           </Row>
           <Row>
             <Col sm={2}></Col>
             <Col sm={8}>
-                <Col sm={5}>
-                  <OverlayTrigger placement='bottom' overlay={tooltip_add}>
-                      <Button onClick={()=>this.addRow()}>
-                        Add Item
+              <Col sm={5}>
+                <OverlayTrigger placement='bottom' overlay={tooltip_add}>
+                  <Button onClick={() => this.addRow()}>
+                    Add Item
                       </Button>
-                  </OverlayTrigger>
-                </Col>
-                <Col sm={2}></Col>
-                <Col sm={5}>
-                  {!this.state.rowObjList.size||submit}
-                </Col>
+                </OverlayTrigger>
+              </Col>
+              <Col sm={2}></Col>
+              <Col sm={5}>
+                {this.state.rowcount ? submit : null}
+              </Col>
             </Col>
             <Col sm={2}></Col>
           </Row>
         </Col>
 
-        <Col sm={3}>
+        <Col sm={1}>
+
         </Col>
       </Template>
     </div>);
   }
 }
-const mapStateToProps = state=>({
-    data : state.centralMess
+const mapStateToProps = state => ({
+  data: state.centralMess,
+  suppliers: state.suppliers
 })
-const mapDispatchToProps = dispatch=>({
-    actions : bindActionCreators(Actions,dispatch)
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators(Actions, dispatch)
 })
 
-export default connect(mapStateToProps,mapDispatchToProps)(PurchaseOrder)
+export default connect(mapStateToProps, mapDispatchToProps)(PurchaseOrder)

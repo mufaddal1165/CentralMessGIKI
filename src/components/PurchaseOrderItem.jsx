@@ -1,123 +1,44 @@
-import React, {PropTypes} from 'react';
-import {Form, Row, Col, Button} from 'react-bootstrap'
-import Radium, {Style} from 'radium'
-import {DateField, Calender} from 'react-date-picker'
+import React, { PropTypes, Component } from 'react';
+import { Form, Row, Col, Button } from 'react-bootstrap'
+import Radium, { Style } from 'radium'
+import { DateField, Calender } from 'react-date-picker'
+import 'react-date-picker/index.css'
 
-export default class PurchaseOrderItem extends React.Component {
+class PurchaseOrderItem extends Component {
+
     constructor(props) {
-
-        super(props);
-        const foodItems = this.props.foodItems;
-        const suppliers = this.props.suppliers;
-        var activeItem = foodItems[0]
-        if (this.props.params){
-          console.log(this.props.params)
-          this.props.foodItems.map(item=>{
-            if(item.Name === this.props.params){
-              activeItem = item
-              console.log(item)
-            }
-          })
-        }
+        super(props)
+        let foodItems = this.props.foodItems.toJS();
         this.state = {
-            activeItem: activeItem,
-            hover: true,
-            qty: 0,
-            rate: 0,
-            activeSupplier: suppliers[0],
-            date: ''
+            activeItem: foodItems[0],
+            hover:false
         }
     }
-
-    componentDidMount() {
-        // document.getElementById('FoodItem'+this.props.serial).value = this.state.activeItem.Name;
-        // document.getElementById('Supplier'+this.props.serial).value = this.state.activeSupplier.Name;
-        // document.getElementById('qty'+this.props.serial).value = this.state.qty;
-        // document.getElementById('rate'+this.props.serial).value = this.state.rate;
-
-    }
-
-    populateItemList() {
-        return this.props.foodItems.map(item => {
-            return (
-                <option key={item.FoodId + item.Name} >{item.Name}</option>
-            )
-        })
-    }
-
-    populateSupplierList() {
-        return this.props.suppliers.map(supplier => {
-            return (
-                <option key={supplier.Name + supplier.SupplierID}>{supplier.Name}</option>
-            )
-        })
-    }
-
-    setActiveItem(itemName) {
-        this.props.foodItems.map(item => {
-            if (item.Name === itemName) {
-                console.log(item.Name, item.Unit);
+    
+    
+    setActiveItem(name) {
+        let foodItems = this.props.foodItems
+        foodItems.map(item => {
+            if (item.Name === name) {
                 this.setState({
                     activeItem: item
-                });
+                })
             }
         })
     }
-
-    setActiveSupplier(supplierName) {
-        this.props.suppliers.map(supplier => {
-            if (supplier.Name == supplierName) {
-                this.setState(
-                    {
-                        activeSupplier: supplier
-                    }
-                )
-            }
-        })
-    }
-
-    setQty(qty) {
-        this.setState({
-            qty: qty
-        })
-        console.log(this.state.qty)
-    }
-
-    setRate(rate) {
-        this.setState(
-            {
-                rate: rate
-            }
-        )
-        console.log(this.state.rate)
-    }
-
-    setDate(date) {
-        this.setState(
-            {
-                date: date
-            }
-        )
-        console.log(this.state.date)
-    }
-
     render() {
-        // const onChange = (dateString,{dateMoment,timeStamp}) = >{console.log(dateString)}
-        let date = '2017-04-24'
-
+        const { foodItems, suppliers, serial } = this.props
         const cross = (<img src="../icons/cross.png" key={this.props.serial + "cross"} width="12rem" height="12rem"
                             onClick={() => {
                                 this.props.crosshandle(this.props.serial)
                             }}></img>)
         return (
             <div className="PurchaseListRow" onMouseLeave={() => {
-                this.setState({hover: true});
-                console.log('Leave')
-            }} onMouseEnter={() => {
                 this.setState({hover: false});
-                console.log('Entered ' + this.props.serial)
+            }} onMouseEnter={() => {
+                this.setState({hover: true});
             }}>
-                <Style scopeSelector=".PurchaseListRow" rules={{
+             <Style scopeSelector=".PurchaseListRow" rules={{
                     padding: "0.3rem",
                     img: {
                         opacity: 0.5,
@@ -128,37 +49,40 @@ export default class PurchaseOrderItem extends React.Component {
                 }}>
 
                 </Style>
-                <Row key={this.props.serial + "Row"}>
-                    <Form key={this.props.serial + "Form"}>
-                        <Col sm={5}>
-                            <select className="form-control" key={"foodItem" + this.props.serial}
-                                    id={"FoodItem" + this.props.serial}
-                                    onChange={() => this.setActiveItem(document.getElementById("FoodItem" + this.props.serial).value)} defaultValue={this.state.activeItem.Name}>
-                                {this.populateItemList()}
-                            </select>
-                        </Col>
-                        <Col sm={2}>
-                            <input className="form-control" id={"Qty" + this.props.serial} type="text"
-                                   key={"qty" + this.props.serial} onChange={() => {
-                                () => this.setQty(document.getElementById("Qty" + this.props.serial).value)
-                            }}></input>
-                        </Col>
-                        <Col sm={1}>
-                            <div style={{"textAlign": "center"}}>
-                                <strong >{this.state.activeItem.Unit}</strong>
-                            </div>
-                        </Col>
-                        <Col sm={2}>
-                            <input className="form-control" id={"Rate" + this.props.serial} type="text"
-                                   key={"rate" + this.props.serial} onChange={() => {
-                                () => this.setRate(document.getElementById("Rate" + this.props.serial).value)
-                            }}></input>
-                        </Col>
-                        <Col sm={2}>
-                            {this.state.hover || cross}
-                        </Col>
-                    </Form>
+                <Row>
+                    <Col sm={3}>
+                        <select name="" className="form-control" id={`foodItem_${serial}`} key={`foodItem_${serial}`} onChange={()=>this.setActiveItem(document.getElementById(`foodItem_${serial}`).value)}>
+                            {
+                                foodItems.map(foodItem => <option key={`FoodItem_${foodItem.FoodId}_${serial}`}>{foodItem.Name}</option>)
+                            }
+                        </select>
+                    </Col>
+                    <Col sm={3}>
+                        <select name="" id="" className="form-control" key={`supplier_${serial}`}>
+                            {
+                                suppliers.map(supplier => <option key={`Supplier_${supplier.SupplierId}_${serial}`}>{supplier.Name}</option>)
+                            }
+                        </select>
+                    </Col>
+                    <Col sm={1}>
+                        <input type="text" className="form-control" key={`qty_${serial}`} />
+                    </Col>
+                    <Col sm={1}>
+                        {this.state.activeItem.Unit}
+                    </Col>
+                    <Col sm={1}>
+                        <input type="text" className="form-control" key={`rate_${serial}`} />
+                    </Col>
+                    <Col sm={2}>
+                        <DateField dateFormat='YYYY-MM-DD' key={`date_${serial}`} />
+                    </Col>
+                    <Col sm={1}>
+                    {!this.state.hover || cross}
+                    </Col>
                 </Row>
-            </div>);
+            </div>
+        )
     }
 }
+
+export default PurchaseOrderItem
