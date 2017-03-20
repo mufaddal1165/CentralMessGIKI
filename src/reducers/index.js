@@ -62,7 +62,8 @@ const purchaseItem = (state = Map({
 
 const allReducers = combineReducers({
     centralMess,
-    suppliers
+    suppliers,
+    purchaseItem
 }
 )
 

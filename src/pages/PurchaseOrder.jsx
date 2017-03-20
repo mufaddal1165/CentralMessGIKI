@@ -13,8 +13,27 @@ import 'react-date-picker/index.css'
 class PurchaseOrder extends React.Component {
   constructor(props) {
     super(props);
+
+    var items = Map()
+    var count = 0
+    const suppliers = this.props.suppliers.get('suppliers')
+    const foodItems = this.props.data.get('foodItems')
+    const params = this.props.params.get('paramsToPurOrder')
+    const _props = {
+      suppliers: suppliers,
+      foodItems: foodItems,
+      crosshandle: this.delRow.bind(this),
+      transmitter: this.handleChange.bind(this),
+      actions: this.props.actions
+
+    }
+    params.map(item => {
+      items = items.merge(Map.of(count, <PurchaseOrderItem {..._props} serial={count++} param = {item} />))
+    })
     this.state = {
-      itemRows: Map()
+      itemRows: items,
+      rowcount: count,
+      data: Map() // data from child components
     }
 
   }
@@ -23,21 +42,23 @@ class PurchaseOrder extends React.Component {
     const { fetchSuppliers, fetchFoodItems } = this.props.actions
     fetchSuppliers()
     fetchFoodItems()
-
-
   }
   componentDidMount() {
-    const suppliers = this.props.suppliers.get('suppliers')
-    const foodItems = this.props.data.get('foodItems')
-    console.log('params',this.props.params)
-    this.setState({
-      rowcount: 0,
 
-    })
   }
-
+  handleChange(index, name, value) {
+    console.log(index, name, value)
+  }
   addRow() {
-    var rows = this.state.itemRows.merge(Map.of(this.state.rowcount, <PurchaseOrderItem suppliers={this.props.suppliers.get('suppliers')} foodItems={this.props.data.get('foodItems')} actions={this.props.actions} serial={this.state.rowcount} crosshandle={this.delRow.bind(this)} />));
+    const props = {
+      suppliers: this.props.suppliers.get('suppliers'),
+      foodItems: this.props.data.get('foodItems'),
+      serial: this.state.rowcount,
+      crosshandle: this.delRow.bind(this),
+      actions: this.props.actions,
+      transmitter: this.handleChange.bind(this)
+    }
+    var rows = this.state.itemRows.merge(Map.of(this.state.rowcount, <PurchaseOrderItem {...props} />));
     var rowCount = this.state.rowcount + 1;
     this.setState(
       {
@@ -55,16 +76,21 @@ class PurchaseOrder extends React.Component {
       rowcount: count
     })
   }
+
   render() {
     const suppliers = this.props.suppliers.get('suppliers')
     const foodItems = this.props.data.get('foodItems')
+    const params = this.props.params.get('paramsToPurOrder')
+
     const tooltip_add = (<Tooltip id='tooltip_add'>To add more items for purchase order</Tooltip>)
     const tooltip_submit = (<Tooltip id='tooltip_submit'> Saves the purchase order</Tooltip>)
+
     const submit = (<OverlayTrigger placement='bottom' overlay={tooltip_submit}>
-      <Button onClick={() => { }}>
+      <Button onClick={() => this.handleSubmit()}>
         Submit
       </Button>
     </OverlayTrigger>)
+
     const headings = (
       <div>
         <Style scopeSelector={headings}
@@ -88,7 +114,7 @@ class PurchaseOrder extends React.Component {
             <Col sm={1}>Qty</Col>
             <Col sm={1}>Unit</Col>
             <Col sm={1}>Rate</Col>
-            <Col sm={3}>Delivery Date</Col>
+            <Col sm={2}>Delivery Date</Col>
           </Row>
         </div>
       </div>
@@ -106,7 +132,7 @@ class PurchaseOrder extends React.Component {
             {headings}
           </Row>
           <Row>
-            {this.state.itemRows}
+            {this.state.itemRows.map(item => item)}
           </Row>
           <Row>
             <Col sm={2}></Col>
@@ -125,6 +151,11 @@ class PurchaseOrder extends React.Component {
             </Col>
             <Col sm={2}></Col>
           </Row>
+          <Row>
+
+
+
+          </Row>
         </Col>
 
         <Col sm={1}>
@@ -136,7 +167,8 @@ class PurchaseOrder extends React.Component {
 }
 const mapStateToProps = state => ({
   data: state.centralMess,
-  suppliers: state.suppliers
+  suppliers: state.suppliers,
+  params: state.purchaseItem
 })
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(Actions, dispatch)

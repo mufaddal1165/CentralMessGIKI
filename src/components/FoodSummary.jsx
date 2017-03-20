@@ -25,6 +25,9 @@ export default class FoodSummary extends React.Component {
       sel_count: cnt
     })
   }
+  addToparams(itemName){
+    console.log(itemName)
+  }
   render() {
     const foodItems = this.props.foodItems
     let count = (this.state.sel_count) ? <span>({this.state.sel_count})</span> : null
@@ -74,7 +77,7 @@ export default class FoodSummary extends React.Component {
                 <td>{item.Drawn}</td>
                 <td>{item.Delivery}</td>
                 <td style={item.Min > item.Quantity ? { 'color': qtyColor } : {}}>{item.Quantity} {item.Unit}</td>
-                <td><Link to={`PurchaseOrder/${item.Name}`}>Order</Link></td>
+                <td onClick={()=>(this.props.paramhandle(item))}><Link to={`PurchaseOrder`}>Order</Link></td>
               </tr>
             })
           }
