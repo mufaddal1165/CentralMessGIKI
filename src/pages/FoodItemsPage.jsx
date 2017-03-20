@@ -29,13 +29,11 @@ class FoodItemsPage extends React.Component {
     this.setState({
       searchtext: event.target.value
     })
-    console.log(this.state.searchtext)
     var items = List()
     if (this.state.searchtext !== '') {
       this.props.data.get('foodItems').map(item => {
-        if (item.Name === this.state.searchtext) {
+        if (item.Name.toLowerCase().includes(this.state.searchtext.toLowerCase())) {
           items = items.push(item)
-          console.log('match')
         }
       })
       this.setState({
@@ -45,6 +43,10 @@ class FoodItemsPage extends React.Component {
 
   }
   render() {
+
+    if (this.props.data.get('isFetching')){
+      return <div>Loading...</div>
+    }
     return (<div className="headerSummaryPage">
       <Style scopeSelector=".headerSummaryPage" rules={{
         h3: {

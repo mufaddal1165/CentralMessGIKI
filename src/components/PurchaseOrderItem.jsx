@@ -14,10 +14,17 @@ class PurchaseOrderItem extends Component {
             hover: false,
             date: Date.now(),
             unit: foodItems[0].Unit,
-            foodItem: this.props.param ? this.props.param.FoodId : ''
-
+            foodItem: this.props.param ? this.props.param.FoodId : '',
+            supplier: supplier[0].SupplierId
         }
         this.handleChange = this.handleChange.bind(this)
+        // initial values sent to the parent Component
+        // to make sure if the initial values are not changed, there are always valeus in the store
+    }
+    componentDidMount() {
+        this.props.transmitter(this.props.serial, 'foodItem', this.state.foodItem)
+        this.props.transmitter(this.props.serial, 'supplier', this.state.supplier)
+
     }
 
     handleChange(event) {
@@ -50,6 +57,7 @@ class PurchaseOrderItem extends Component {
             onClick={() => {
                 this.props.crosshandle(this.props.serial)
             }}></img>)
+       
         return (
             <div className="PurchaseListRow" onMouseLeave={() => {
                 this.setState({ hover: false });
@@ -102,7 +110,7 @@ class PurchaseOrderItem extends Component {
 
                                     date: value
                                 })
-                                this.props.transmitter(0, "date", this.state.date)
+                                this.props.transmitter(this.props.serial, "date", this.state.date)
                             }} />
                         </Col>
                         <Col sm={1}>

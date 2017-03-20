@@ -28,7 +28,7 @@ class PurchaseOrder extends React.Component {
 
     }
     params.map(item => {
-      items = items.merge(Map.of(count, <PurchaseOrderItem {..._props} serial={count++} param = {item} />))
+      items = items.merge(Map.of(count, <PurchaseOrderItem {..._props} serial={count++} param={item} />))
     })
     this.state = {
       itemRows: items,
@@ -47,7 +47,13 @@ class PurchaseOrder extends React.Component {
 
   }
   handleChange(index, name, value) {
-    console.log(index, name, value)
+
+    var change = Map.of(index, Map.of( name, value ) )
+    var data = this.state.data.mergeDeep(change)
+    this.setState({
+      data: data
+    })
+    console.log(data.toJS())
   }
   addRow() {
     const props = {
@@ -70,10 +76,12 @@ class PurchaseOrder extends React.Component {
   }
   delRow(index) {
     var rows = this.state.itemRows.delete(index)
+    var data = this.state.data.delete(index)
     let count = this.state.rowcount - 1
     this.setState({
       itemRows: rows,
-      rowcount: count
+      rowcount: count,
+      data: data
     })
   }
 
@@ -119,6 +127,11 @@ class PurchaseOrder extends React.Component {
         </div>
       </div>
     )
+    if (this.props.data.get('isFetching') && this.props.suppliers.get('isFetching')){
+      return (
+        <div>Loading ... </div>
+      )
+    }
     return (<div>
 
       <Template>
