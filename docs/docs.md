@@ -2,7 +2,7 @@
 
 ## Tables
 
-### Food Item
+### foodItem
 Field | Description
 -----|--------------
 foodId | unique ID through which a food will be identified in the system
@@ -14,13 +14,13 @@ lastDrawingDate | The date when the food was last drawn from stock
 minReOrderLimit | The minimum weight or qty after which the item should be reordered
 unit|String literal specifying kilos, dozens, pieces
 
-### Type of Food
+### typeofFood
 Field | Description
 ------|-------------
 typeOfFoodId | Unique ID for type of Food
-Name | For the current system, there are two types : Fresh or Dry
+name | For the current system, there are two types : Fresh or Dry
 
-### PurchaseOrder
+### purchaseOrder
 Field | Description
 ------|-------------
 pOId| Unique ID
@@ -32,12 +32,12 @@ deliveryDate | Date on which delivery is expected
 Note:
 *its being assumed that all items in the purchase order will be required on same time*
 
-### PurchaseOrderItems
+### purchaseOrderItem
 Field | Description
 ------|-------------
 pOItemId  | Unique ID
-food | Food ID of the Item (FK)
-purchaseOrder | Purchase Order ID (FK)
+foodId | Food ID of the Item (FK)
+pOId | Purchase Order ID (FK)
 delivered | Boolean Flag to indicate that item was delivered or not
 quantityDemanded | The quantity of items ordered
 *quantityReceived | Quantity received
@@ -45,7 +45,7 @@ rate | The rate at which the items are ordered
 
 *Note : This field might not be needed
 
-## Supplier
+## supplier
 Field | Description
 ------|-------------
 supplierId | Unique ID of Supplier
@@ -54,7 +54,7 @@ contactNo | Contact Number of the supplier
 address | Address of the supplier
 
 
-## Payment Voucher
+## paymentVoucher
 Field | Description
 ------|-------------
 paymentVId | Payment Voucher Unique ID
@@ -62,7 +62,7 @@ pONumber | Purchase order Number (FK: PurchaseOrder)
 date | Date of Voucher
 supplierID | SupplierID
 
-## DrawingsTable
+## drawingsTable
 
 Field|Description
 -----|------------
@@ -71,7 +71,7 @@ foodId | FK FoodItems
 quantity | Quantity of items drawn from system
 date | Date of the transaction
 
-## EntriesLog
+## entriesLog
 
 Field|Description
 -----|------------
