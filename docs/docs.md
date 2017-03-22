@@ -67,7 +67,7 @@ supplierID | SupplierID
 Field|Description
 -----|------------
 drawingID | Unique ID
-foodId | FK FoodItems 
+foodId | FK FoodItems
 quantity | Quantity of items drawn from system
 date | Date of the transaction
 
@@ -79,10 +79,11 @@ logID | Unique ID
 foodId | FK FoodItems
 quantity | Quantity of items added to store
 pOItemNo | FK from PurchaseOrderItems Tables
+date | date at which this item was received
 paid | Boolean value specifying paid or unpaid
 
 ## Relationships
- - Suppier 1 ---- n Payment Voucher 
+ - Suppier 1 ---- n Payment Voucher
  - Purchase Order 1 -----n Payment Voucher
  - FoodItems 1 ------ n EntriesLog
  - PurchaseOrderItem 1 ------ n EntriesLog
