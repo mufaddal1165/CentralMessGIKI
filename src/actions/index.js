@@ -25,7 +25,11 @@ export const requestFoodItems = () => ({ type: types.REQUEST_FOOD_ITEMS })
 export const requestSuppliers = () => ({ type: types.REQUEST_SUPPLIERS })
 export const receiveSuppliers = (items) => ({ type: types.RECEIVE_SUPPLIERS, items })
 
-export const addToPrItem = item=>({type:types.ADDTO_PURCHASE_ITEM,item}) 
+export const requestPurchaseOrder = () =>({type:types.REQUEST_PURCHASE_ORDER})
+export const receivePurchaseOrder = (items) =>({type:types.RECEIVE_PURCHASE_ORDER,items})
+
+
+export const addToPrItem = item => ({ type: types.ADDTO_PURCHASE_ITEM, item })
 //data
 export const fetchFoodItems = () => dispatch => {
     dispatch(requestFoodItems())
@@ -41,4 +45,11 @@ export const fetchSuppliers = () => dispatch => {
         .then(response => response.json())
         .then(json => dispatch(receiveSuppliers(json)))
 
+}
+
+export const fetchPurchaseOrders = () => dispatch => {
+    dispatch(requestPurchaseOrder())
+    fetch(`../../data/purchaseOrder.json`)
+    .then(response=>response.json())
+    .then(json=>dispatch(receivePurchaseOrder(json)))
 }

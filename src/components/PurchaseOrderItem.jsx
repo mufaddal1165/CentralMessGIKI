@@ -13,9 +13,9 @@ class PurchaseOrderItem extends Component {
         this.state = {
             hover: false,
             date: Date.now(),
-            unit: foodItems[0].Unit,
-            foodItem: this.props.param ? this.props.param.FoodId : '',
-            supplier: supplier[0].SupplierId
+            unit: foodItems[0].unit,
+            foodItem: this.props.param ? this.props.param.id : '',
+            supplier: supplier ? supplier[0].SupplierId : ''
         }
         this.handleChange = this.handleChange.bind(this)
         // initial values sent to the parent Component
@@ -37,9 +37,9 @@ class PurchaseOrderItem extends Component {
         })
         if (name == 'foodItem') {
             this.props.foodItems.map(item => {
-                if (item.FoodId == val) {
+                if (item.id == val) {
                     this.setState({
-                        unit: item.Unit
+                        unit: item.unit
                     })
                     return
                 }
@@ -57,7 +57,7 @@ class PurchaseOrderItem extends Component {
             onClick={() => {
                 this.props.crosshandle(this.props.serial)
             }}></img>)
-       
+
         return (
             <div className="PurchaseListRow" onMouseLeave={() => {
                 this.setState({ hover: false });
@@ -80,7 +80,7 @@ class PurchaseOrderItem extends Component {
                         <Col sm={3}>
                             <select name="foodItem" className="form-control" key={`foodItem_${serial}`} onChange={this.handleChange} value={this.state.foodItem}>
                                 {
-                                    foodItems.map(foodItem => <option value={foodItem.FoodId} key={`FoodItem_${foodItem.FoodId}_${serial}`}>{foodItem.Name}</option>)
+                                    foodItems.map(foodItem => <option value={foodItem.id} key={`FoodItem_${foodItem.id}_${serial}`}>{foodItem.name}</option>)
                                 }
                             </select>
                         </Col>

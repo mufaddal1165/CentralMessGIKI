@@ -23,7 +23,7 @@ class SelectItems extends React.Component{
       console.log(this.props.data.get('foodItems'))
       return (
           this.props.data.get('foodItems').map((item) => {
-              return <option key={item.Name}>{item.Name}</option>
+              return <option value={item.id} key={item.name}>{item.name}</option>
           })
       )
   }
@@ -31,8 +31,8 @@ class SelectItems extends React.Component{
   setActiveItem(itemName) {
       // var _this = this;
       this.props.data.get('foodItems').map(item => {
-          if (item.Name === itemName) {
-              console.log(item.Name, item.Unit);
+          if (item.name === itemName) {
+              console.log(item.name, item.unit);
               this.setState({
                   activeItem: item
               });
@@ -64,7 +64,7 @@ class SelectItems extends React.Component{
   }
 
   renderForm() {
-    var addButton = this.state.isStockOut && this.state.activeItem.Quantity == 0 ?(  <button className="btn btn-default" onClick={() => this.addItemToList()} disabled>
+    var addButton = this.state.isStockOut && this.state.activeItem.quantity == 0 ?(  <button className="btn btn-default" onClick={() => this.addItemToList()} disabled>
           Add
       </button>):(<button className="btn btn-default" onClick={() => this.addItemToList()}>
             Add
@@ -74,7 +74,7 @@ class SelectItems extends React.Component{
 
               <Row className="headings">
                   <Col sm={4}><strong>Item</strong></Col>
-                  <Col sm={2}><strong>{this.state.activeItem.Unit}</strong></Col>
+                  <Col sm={2}><strong>{this.state.activeItem.unit}</strong></Col>
                   <Col sm={4}><strong>Stock</strong></Col>
                   <Col sm={2}></Col>
               </Row>
@@ -105,7 +105,7 @@ class SelectItems extends React.Component{
                       id="inStockQty"
                       type="text"
                       disabled="disabled"
-                      value = {this.state.activeItem.Quantity+' '+this.state.activeItem.Unit}
+                      value = {this.state.activeItem.quantity+' '+this.state.activeItem.unit}
                       />
                   </Col>
                   <Col sm={2}>
@@ -117,6 +117,7 @@ class SelectItems extends React.Component{
   }
 
   render() {
+     
       const tooltip_submit = (<Tooltip id={'tooltip_' + 'submit_stockin'}>Saves changes in the database</Tooltip>)
       // let displayMessage =(this.state.isConfDlgVsbl)?<ModalMessage key='confirmation-dialog' message='Are you sure you want to save?' primaryButton='OK' primaryButtonClicked={this.dialogMsg}/>:null;
       const submit = (
@@ -132,8 +133,8 @@ class SelectItems extends React.Component{
                           {//this.state.tmpSelectedList
                               this.props.data.get(this.props.dataComp).map((item, i) => {
                                   console.log(i)
-                                  return <ItemsList itemName={item.foodItem.Name} qty={item.qty} key={i} serial={i}
-                                                    unit={item.foodItem.Unit}
+                                  return <ItemsList itemName={item.foodItem.name} qty={item.qty} key={i} serial={i}
+                                                    unit={item.foodItem.unit}
                                                     crosshandle={this.delItemListRow.bind(this)}/>
                               })
                           }

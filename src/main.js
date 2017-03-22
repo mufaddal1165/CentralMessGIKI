@@ -29,7 +29,7 @@ let store = createStore(
 render(
   <Provider store={store}>
     <Router history={hashHistory} >
-      <Route path="/" component={App} />
+      <Route path="/Home" component={App} />
       <Router path="/StockOut" component={StockOut} />
       <Router path="/StockIn" component={StockIn} />
       <Router path="PurchaseOrder" component={PurchaseOrder} />
@@ -37,7 +37,7 @@ render(
       <Router path="DemandItems" component={DemandItems} />
       <Router path="FoodItems" component={FoodItemsPage} />
       <Router path='Settings' component={Settings} />
-      <Router path='Login' component={Login} />
+      <Router path='/' component={Login} />
     </Router>
   </Provider>
 

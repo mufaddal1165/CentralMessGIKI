@@ -32,7 +32,7 @@ class FoodItemsPage extends React.Component {
     var items = List()
     if (this.state.searchtext !== '') {
       this.props.data.get('foodItems').map(item => {
-        if (item.Name.toLowerCase().includes(this.state.searchtext.toLowerCase())) {
+        if (item.name.toLowerCase().includes(this.state.searchtext.toLowerCase())) {
           items = items.push(item)
         }
       })

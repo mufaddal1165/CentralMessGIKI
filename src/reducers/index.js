@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
 // import { centralMess, fetchData } from './reducer-funcs.js'
 import Immutable, { Map, List } from 'immutable'
-import { REQUEST_FOOD_ITEMS, RECEIVE_FOOD_ITEMS, REQUEST_SUPPLIERS, RECEIVE_SUPPLIERS, ADDTO_PURCHASE_ITEM } from '../constants/ActionTypes.js'
+import { REQUEST_FOOD_ITEMS, RECEIVE_FOOD_ITEMS, REQUEST_SUPPLIERS, RECEIVE_SUPPLIERS, ADDTO_PURCHASE_ITEM, REQUEST_PURCHASE_ORDER, RECEIVE_PURCHASE_ORDER } from '../constants/ActionTypes.js'
 
 const centralMess = (state = Map({
     isFetching: false,
@@ -49,12 +49,18 @@ const suppliers = (state = Map({
 }
 
 const purchaseItem = (state = Map({
-    paramsToPurOrder: List()
+    isFetching: false,
+    paramsToPurOrder: List(),
+    purchaseOrder: List()
 }), action) => {
     switch (action.type) {
         case ADDTO_PURCHASE_ITEM:
             let purItems = state.get('paramsToPurOrder').push(action.item)
             return state.merge({ paramsToPurOrder: purItems })
+        case REQUEST_PURCHASE_ORDER:
+            return state.set('isFetching', true)
+        case RECEIVE_PURCHASE_ORDER:
+            return state.merge({ purchaseOrder: List(action.items), isFetching: false })
         default:
             return state
     }

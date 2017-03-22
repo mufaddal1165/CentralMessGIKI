@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import { Row, Col, Table } from 'react-bootstrap'
 import { Style } from 'radium'
 import { Link } from 'react-router'
+import moment from 'moment'
 export default class FoodSummary extends React.Component {
   constructor(props) {
     super(props);
@@ -70,13 +71,13 @@ export default class FoodSummary extends React.Component {
         <tbody>
           {
             foodItems.map((item, i) => {
-              return <tr key={item.Name + i}>
-                <td><form><input key={item.Name + i + 'checkbox'} id={item.Name + i + 'checkbox'} onChange={() => this.checkBoxChange(item.Name, i)} type='checkbox'></input></form></td>
+              return <tr key={item.name + i}>
+                <td><form><input key={item.name + i + 'checkbox'} id={item.name + i + 'checkbox'} onChange={() => this.checkBoxChange(item.name, i)} type='checkbox'></input></form></td>
                 <td>{i + 1}</td>
-                <td>{item.Name}</td>
-                <td>{item.Drawn}</td>
-                <td>{item.Delivery}</td>
-                <td style={item.Min > item.Quantity ? { 'color': qtyColor } : {}}>{item.Quantity} {item.Unit}</td>
+                <td>{item.name}</td>
+                <td>{moment(item.lastDrawingDate).format('Do MMM YYYY')}</td>
+                <td>{moment(item.lastEntryDate).format('Do MMM YYYY')}</td>
+                <td style={item.minReOrderLimit > item.quantity ? { 'color': qtyColor } : {}}>{item.quantity} {item.unit}</td>
                 <td onClick={()=>(this.props.paramhandle(item))}><Link to={`PurchaseOrder`}>Order</Link></td>
               </tr>
             })
