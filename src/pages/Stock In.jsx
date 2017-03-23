@@ -18,8 +18,23 @@ class StockIn extends React.Component {
     fetchPurchaseOrders()
     this.state = {
       purchaseOrder: null,
-      query: ''
+      query: '',
+      entryLogs: Map()
+
     }
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
+  handleSubmit() {
+    const obj = this.state.entryLogs.toJS()
+    console.log(obj)
+  }
+  handleChange(event) {
+    const name = event.target.name
+    const value = event.target.value
+    this.setState({
+      entryLogs: this.state.entryLogs.merge(Map.of(name, value))
+    })
   }
   getPurchaseOrder(id) {
     const purchaseOrders = this.props.purchaseOrder.get('purchaseOrder')
@@ -95,7 +110,7 @@ class StockIn extends React.Component {
                     <td>{order.rate}/{order.foodItem.unit}</td>
                     <td>{order.delivered} </td>
                     <td>
-                      <input size="1" className='form-control' placeholder={`${order.foodItem.unit}s`} name={order.id} type="text" />
+                      <input size="1" className='form-control' placeholder={`${order.foodItem.unit}s`} name={order.id} type="text" onChange={this.handleChange} />
                     </td>
                   </tr>
                 )
@@ -105,6 +120,9 @@ class StockIn extends React.Component {
           </tbody>
         </Table>
         <hr />
+        <button className='form-control' type='submit' onClick={this.handleSubmit}>
+          Submit
+        </button>
       </div>
     )
   }
@@ -118,7 +136,7 @@ class StockIn extends React.Component {
         <Col sm={1}></Col>
         <Col sm={7}>
           <h3>Stock In</h3>
-          {/*<SelectItems data={this.props.data} del={this.props.actions.delTmpStock} clear={this.props.actions.clearTempStock} add={this.props.actions.addTmpStock} commit={this.props.actions.commitStockAdds} dataComp='tmpStockAdded'/>*/}
+
           <Row>
             <Form inline>
               <FormGroup controlId="formInlineName">
