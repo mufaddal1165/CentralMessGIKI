@@ -31,22 +31,30 @@ class StockOut extends React.Component {
     }
 
     render() {
-        if(this.props.data.get('isFetching')){
+        if (this.props.data.get('isFetching')) {
             return <div>Loading...</div>
+        }
+        const propsSelectItem = {
+            data: this.props.data,
+            del: this.props.actions.deleteDrawing,
+            commit: this.props.actions.commitDrawings,
+            add: this.props.actions.addDrawing,
+            list: this.props.drawings.get('drawnOut'),
+
         }
         return (
             <div >
                 <Template>
 
-                    <Col sm={3}></Col>
-                    <Col sm={4}>
+                    <Col sm={1}></Col>
+                    <Col sm={6}>
                         <h3>Stock Drawings</h3>
-                        <SelectItems data={this.props.data} del={this.props.actions.delTmpDrawings} clear={this.props.actions.clearTempDrawings} add={this.props.actions.addTempDrawings} commit={this.props.actions.commitStockDrawings} dataComp='tmpDrawnToday' isStockOut={true} />
+                        <SelectItems {...propsSelectItem} />
 
                     </Col>
                     <Col sm={1}></Col>
                     <Col sm={4}>
-                        <Summary heading="Food Item Summary" List={this.props.data.get('stockAdded')} />
+
                     </Col>
                 </Template>
             </div>
@@ -54,7 +62,8 @@ class StockOut extends React.Component {
     }
 }
 const mapStateToProps = state => ({
-    data: state.centralMess
+    data: state.centralMess,
+    drawings: state.drawings
 })
 const mapDispatchToProps = dispatch => ({
     actions: bindActionCreators(Actions, dispatch)

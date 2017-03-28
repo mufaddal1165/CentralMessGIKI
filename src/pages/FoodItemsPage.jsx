@@ -62,7 +62,7 @@ class FoodItemsPage extends React.Component {
         <Col sm={8}>
           <Row>
             <Col sm={7}>
-              <h3>Food Items Summary</h3>
+              <h3>Items available in Stock</h3>
             </Col>
             <Col sm={5}>
               <Form inline>

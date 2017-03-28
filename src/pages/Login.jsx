@@ -15,11 +15,12 @@ class Login extends React.Component {
   }
   handleSubmit(e) {
 
-    axios.post(`https://tranquil-bastion-28756.herokuapp.com/login`, {
-      usename: this.state.user,
-      password: this.state.password
-    }).then(response => alert('login',response))
+    // axios.post(`https://tranquil-bastion-28756.herokuapp.com/login`, {
+    //   usename: this.state.user,
+    //   password: this.state.password
+    // }).then(response => alert('login',response))
     e.preventDefault()
+    this.props.history.push('/Home')
 
   }
   handleChange(event) {

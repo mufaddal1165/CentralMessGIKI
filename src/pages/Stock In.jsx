@@ -28,6 +28,7 @@ class StockIn extends React.Component {
   handleSubmit() {
     const obj = this.state.entryLogs.toJS()
     console.log(obj)
+    confirm()
   }
   handleChange(event) {
     const name = event.target.name
@@ -37,6 +38,10 @@ class StockIn extends React.Component {
     })
   }
   getPurchaseOrder(id) {
+    this.setState({
+      entryLogs: Map(),
+      purchaseOrder: null
+    })
     const purchaseOrders = this.props.purchaseOrder.get('purchaseOrder')
     purchaseOrders.map(order => {
       if (order.id == id) {
@@ -120,9 +125,11 @@ class StockIn extends React.Component {
           </tbody>
         </Table>
         <hr />
-        <button className='form-control' type='submit' onClick={this.handleSubmit}>
-          Submit
+        <div className="submitbutton">
+          <button className='form-control' style={{ 'margin':'auto','width':'10rem' }} type='submit' onClick={this.handleSubmit}>
+            Submit
         </button>
+        </div>
       </div>
     )
   }
@@ -170,7 +177,6 @@ class StockIn extends React.Component {
         </Col>
         <Col sm={1}></Col>
         <Col sm={3}>
-          <Summary List={this.props.data.get('stockAdded')} heading="Items Added" />
         </Col>
       </Template>
     </div>);

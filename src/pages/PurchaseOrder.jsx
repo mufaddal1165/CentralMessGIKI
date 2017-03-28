@@ -48,12 +48,15 @@ class PurchaseOrder extends React.Component {
   }
   handleChange(index, name, value) {
 
-    var change = Map.of(index, Map.of( name, value ) )
+    var change = Map.of(index, Map.of(name, value))
     var data = this.state.data.mergeDeep(change)
     this.setState({
       data: data
     })
-    console.log(data.toJS())
+    
+  }
+  handleSubmit() {
+
   }
   addRow() {
     const props = {
@@ -127,7 +130,7 @@ class PurchaseOrder extends React.Component {
         </div>
       </div>
     )
-    if (this.props.data.get('isFetching') && this.props.suppliers.get('isFetching')){
+    if (this.props.data.get('isFetching') && this.props.suppliers.get('isFetching')) {
       return (
         <div>Loading ... </div>
       )

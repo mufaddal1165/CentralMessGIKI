@@ -14,17 +14,17 @@ class Box extends React.Component {
     }
 
     componentWillMount() {
-      var keys = []
-      var itemList = this.props.stock.toJS()
-      for (var key in this.props.stock.toJS()[0]){
-        keys.push(key)
-        console.log(key)
-      }
-      console.log(keys)
-      this.setState ({
-        headings:keys,
-        itemList:itemList
-      })
+      // var keys = []
+      // var itemList = this.props.stock.toJS()
+      // for (var key in this.props.stock.toJS()[0]){
+      //   keys.push(key)
+      //   console.log(key)
+      // }
+      // console.log(keys)
+      // this.setState ({
+      //   headings:keys,
+      //   itemList:itemList
+      // })
     }
 
     render() {

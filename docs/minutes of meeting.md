@@ -37,3 +37,10 @@
   - in case of grave confusion, reach out to 67/2
 
 https://material.io/guidelines/style/color.html
+
+## With Staff 27th Mar
+- consumption statistics
+- edit the temp items list
+- demand and stock out duplication avoidance
+- time along with last delivery and last drawn out
+- change title of summary List of Available Items 
